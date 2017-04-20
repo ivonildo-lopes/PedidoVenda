@@ -101,7 +101,7 @@ public class Email {
             //  message.setFrom(new InternetAddress("ivonildolopes@gmail.com")); //Remetente
               message.setFrom(new InternetAddress(remetente)); //Remetente
               Address[] toUser = InternetAddress //Destinat�rio(s)
-                         .parse("waldeci.silva@sefaz.ce.gov.br");  
+                         .parse("waldeci.silva@sxxxxxx");  
 
               message.setRecipients(Message.RecipientType.TO, toUser);
               message.setSubject("Bom dia");//Assunto
