@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<h:panelGroup layout="block" style="padding-right: 10px">
+<!-- 		<p:inputTextarea rows="10" style="width: 100%" value="#{cadastroPedidoBean.pedido.observacao}" -->
+<!-- 		disabled="#{cadastroPedidoBean.pedido.naoAlteravel}" styleClass="up" /> -->
+
+ 	<p:editor id="editor" widgetVar="editorWidget"
+ 	 value="#{cadastroPedidoBean.pedido.observacao}" styleClass="up" 
+	 />
+	
+	</h:panelGroup>
+  	
+</ui:composition>
