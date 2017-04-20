@@ -31,7 +31,7 @@
 //		config.setServerHost("172.30.121.36");
 //		config.setServerPort(25);
 //		config.setAuth(true);
-//		config.setUsername("ivonildo.lopes@sefaz.ce.gov.br");
+//		config.setUsername("ivonildo.lopes@xxxxxxxxxxxxxx");
 //		config.setPassword("Henry@2019");
 //		return config;
 //		
