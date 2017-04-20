@@ -15,7 +15,7 @@ import javax.mail.internet.MimeMessage;
 public class Email {
 	
 	private String destinatario=null,titulo=null,corpo=null;
-	private String remetente;// = "luma.martins@sefaz.ce.gov.br";
+	private String remetente;// = "luma.martins@xxxxxxxx";
 	
 	//public void email(final String email,final String senha){
 	public void email() throws IOException{
@@ -42,7 +42,7 @@ public class Email {
                         	 //o email e a senha de quem vai mandar
                             //   return new PasswordAuthentication(email, senha);
                         	 //  return new PasswordAuthentication("mail.user", "mail.password");
-                        	   return new PasswordAuthentication("ivonildo.lopes@sefaz.ce.gov.br", "Henry@2019");
+                        	   return new PasswordAuthentication("ivonildo.lopes@xxxxxxxxxx", "Henry@2019");
                          }
                     });
 
@@ -88,7 +88,7 @@ public class Email {
                          protected PasswordAuthentication getPasswordAuthentication()
                          {
                         	 //o email e a senha de quem vai mandar
-                               return new PasswordAuthentication("ivonildo.lopes@sefaz.ce.gov.br", "Henry@2018");
+                               return new PasswordAuthentication("ivonildo.lopes@sxxxxxxxx", "Henry@2018");
                          }
                     });
 
