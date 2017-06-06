@@ -17,7 +17,7 @@
 		</f:metadata>
 
 		<h1>#{cadastroCategoriaBean.verificaEdicao() ? 'Edição de
-			Categoria' : 'Novo Categoria'}</h1>
+			Categoria' : 'Nova Categoria'}</h1>
 
 		<h:form>
 			<p:messages autoUpdate="true" closable="true" />
@@ -38,7 +38,7 @@
 			<p:selectBooleanCheckbox
 				value="#{cadastroCategoriaBean.adionarSubCategoria}"
 				style="margin-top:30px">
-				<p:ajax event="change" process="@this" update="@form" />
+				<p:ajax event="change" process="@this" update="@form painel1" />
 			</p:selectBooleanCheckbox>
 
 			<p:panelGrid columns="2" columnClasses="rotulo, campo"

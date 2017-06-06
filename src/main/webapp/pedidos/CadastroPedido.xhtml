@@ -39,6 +39,7 @@
 			</p:tabView>
 	
 			 <p:growl id="mss"  />
+		
 			<p:dataTable id="tabela"
 				value="#{cadastroPedidoBean.parcelas}" var="parcela"
 				style="margin-top: 20px;font-size:10px"
@@ -67,7 +68,7 @@
 				</p:column>
 	
 				<p:column headerText="ação" style="text-align: center; width: 100px">
-					<p:commandButton id="botao" action="#{parcelaController.salvar(parcela)}" value="receber" update="stt,botao,frmCadastroPedido:mss"
+					<p:commandButton id="botao" action="#{parcelaController.salvar(parcela)}" value="receber" update="stt,botao,frmCadastroPedido:tabela"
 					rendered="#{!parcela.paga}"/>		
 				</p:column>
 				

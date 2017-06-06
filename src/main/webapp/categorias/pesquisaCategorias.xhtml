@@ -12,16 +12,16 @@
 		<h:form>
 			<p:messages autoUpdate="true" closable="true" />
 
-			<h1>Pesquisa de Clientes</h1>
+			<h1>Pesquisa de Categorias</h1>
 
 
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
 					<p:commandButton value="Pesquisa"
-						action="#{pesquisaClienteBean.pesquisar()}" update="@form" />
+						action="#{pesquisaCategoriaBean.pesquisar}" update="@form" />
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
-					<p:button value="Novo" outcome="/clientes/CadastroCliente" />
+					<p:button value="Novo" outcome="/categorias/cadastroCategoria" />
 				</p:toolbarGroup>
 			</p:toolbar>
 
@@ -29,47 +29,38 @@
 			<p:panelGrid columns="2" id="painel"
 				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
 
-				<p:outputLabel value="Cpf" />
-				<p:inputMask mask="999.999.999-99" size="40"
-					value="#{pesquisaClienteBean.clienteParaPesquisa.cpf}" />
-
-				<p:outputLabel value="nome" />
+				<p:outputLabel value="Descricao" />
 				<p:inputText size="40" styleClass="up"
-					value="#{pesquisaClienteBean.clienteParaPesquisa.nome}" />
-
+					value="#{pesquisaCategoriaBean.categoriaParaPesquisa.descricao}" />
+			
 			</p:panelGrid>
 
 			<p:dataTable id="tabelaCliente"
-				value="#{pesquisaClienteBean.listaCliente}" var="cliente"
-				style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
+				value="#{pesquisaCategoriaBean.listaCategoria}" var="categoria"
+				style="margin-top: 20px" emptyMessage="Nenhuma categoria encontrada."
 				rows="20" paginator="true" paginatorAlwaysVisible="false"
 				paginatorPosition="bottom">
 
-				<p:column headerText="Cliente">
-					<h:outputText value="#{cliente.nome}" />
+				<p:column headerText="Sub-Categoria">
+					<h:outputText value="#{categoria.descricao}" />
 				</p:column>
-				<p:column headerText="E-mail">
-					<h:outputText value="#{cliente.email}" />
-				</p:column>
-				<p:column headerText="Data de Nascimento"
-					style="text-align: center; width: 140px">
-					<h:outputText value="#{cliente.dataNascimento}">
-						<f:convertDateTime pattern="dd/MM/yyyy" />
-					</h:outputText>
+				
+				<p:column headerText="Categoria">
+					<h:outputText value="#{categoria.categoriaPai.descricao}" />
 				</p:column>
 
-				<p:column headerText="Valor Pendente"
-				style="text-align: right; width: 120px">
-					<h:outputText 
-						value="#{pesquisaClienteBean.porValorPendente(cliente)}">
-						<f:convertNumber type="currency" />
-					</h:outputText>
-				</p:column>
+<!-- 				<p:column headerText="Valor Pendente" -->
+<!-- 				style="text-align: right; width: 120px"> -->
+<!-- 					<h:outputText  -->
+<!-- 						value="#{pesquisaClienteBean.porValorPendente(cliente)}"> -->
+<!-- 						<f:convertNumber type="currency" /> -->
+<!-- 					</h:outputText> -->
+<!-- 				</p:column> -->
 
 				<p:column style="text-align: center; width: 50px">
 					<p:button icon="ui-icon-pencil" title="Editar"
-						outcome="/clientes/CadastroCliente">
-						<f:param name="cliente" value="#{cliente.id}" />
+						outcome="/categorias/cadastroCategoria">
+						<f:param name="categoria" value="#{categoria.id}" />
 					</p:button>
 				</p:column>
 			</p:dataTable>

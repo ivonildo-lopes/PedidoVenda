@@ -49,15 +49,19 @@
 				<f:selectItem itemLabel="Selecione" />
 				<f:selectItems value="#{cadastroPedidoBean.formasPagemento}"
 					var="forma" itemLabel="#{forma.descricao}" itemValue="#{forma}" />
-				<p:ajax  event="change" process="@this" update="qtd, parcela" listener="#{cadastroPedidoBean.pagamentoCartao()}"/>
+				<p:ajax  event="change" process="@this" update="qtd" listener="#{cadastroPedidoBean.pagamentoCartao()}"/>
 			</p:selectOneMenu>
 			
-			<p:outputLabel value="Qtd" id="qtd"
-				style="margin-left:6px;margin-bottom: 6px" rendered="#{cadastroPedidoBean.pagamentoCartao()}" />
+			
+			<h:panelGroup id="qtd">
+			<p:outputLabel value="Qtd" 
+			style="margin-left:6px;margin-bottom: 6px" rendered="#{cadastroPedidoBean.pagamentoCartao()}" />
 			<p:inputText id="parcela" size="8"
 				style="margin-left:6px;margin-bottom: 6px" rendered="#{cadastroPedidoBean.pagamentoCartao()}"
 				value="#{cadastroPedidoBean.pedido.numeroParcela}"
 				disabled="#{cadastroPedidoBean.pedido.naoAlteravel}" />
+			</h:panelGroup>
+				
 		</h:panelGroup>
 		
 		
