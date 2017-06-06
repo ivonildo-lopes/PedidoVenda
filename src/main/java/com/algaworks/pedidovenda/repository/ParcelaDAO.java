@@ -32,6 +32,22 @@ public class ParcelaDAO implements Serializable {
 		return query.getResultList();
 
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Boolean verificaPedidopago(Pedido pedido) {
+		boolean retorno = false;
+		List<Parcela> lista;
+		String jpql = "from Parcela p where p.pedido.id = :id and p.paga = true";
+		Query query = manager.createQuery(jpql);
+		query.setParameter("id", pedido.getId());
+		lista = query.getResultList();
+		
+		if(!lista.isEmpty())
+			retorno = true;
+		
+		return retorno;
+
+	}
 
 	@Transactional
 	public Parcela salvar(Parcela parcela) {
