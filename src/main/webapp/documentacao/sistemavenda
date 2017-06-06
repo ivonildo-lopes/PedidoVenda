@@ -1,0 +1,43 @@
+SISTEMA DE VENDA E CONTROLE DE ESTOQUE.
+
+TECNOLOGIAS
+JAVAEE
+JSF 2 + PRIMEFACES 6.1
+CDI
+JPA (HIBERNATE)
+
+SERVIDOR DE APLICAÇÃO
+TOMCAT V7.0 
+
+BANDO DE DADOS
+POSTGRESQL 9.3 OU MAIOR
+
+PARA FUNCIONAR BAIXE O SISTEMA DO GIT HUB
+CRIE O BANCO DE NO POSTGRES
+CONFIGURE O TOMCAT E ADICIONE O PROJETO
+INICIE O SERVIDOR DE APLICAÇÃO
+AS TABELAS SERÃO CRIADAS AUTOMATICAMENTE
+APAGUE A TABELA PARCELAS 
+E CRIE NOVAMENTE COM O SCRIPT QUE ESTA NESTA PAGINA
+PedidoVenda\src\main\resources\com\algaworks\pedidovenda
+O NOME DO ARQUIVO É create_parcelas.sql
+DEPOIS DISSO
+CRIE UMA FUNÇÃO QUE ESTA NESSA CAMINHO
+PedidoVenda\src\main\resources\com\algaworks\pedidovenda
+O NOME DO ARQUIVO É create_function
+DEPOIS DISSO
+CRIE UMA TRIGGER
+PedidoVenda\src\main\resources\com\algaworks\pedidovenda
+O NOME DO ARQUIVO É create_trigger
+
+pronto a aplicação estará funcionando
+
+para melhor uso adicione 
+um usuario
+uma categoria
+uma subcategoria
+um setor
+um cliente
+um produto
+e por fim o novo pedido
+
