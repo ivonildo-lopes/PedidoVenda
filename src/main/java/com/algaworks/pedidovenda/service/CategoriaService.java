@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import com.algaworks.pedidovenda.model.Categoria;
 import com.algaworks.pedidovenda.repository.CategoriaDAO;
+import com.algaworks.pedidovenda.repository.filter.CategoriaParaPesquisa;
 import com.algaworks.pedidovenda.util.jpa.Transactional;
 import com.algaworks.pedidovenda.util.jsf.FacesUtil;
 
@@ -40,6 +41,10 @@ public class CategoriaService implements Serializable {
 	
 	public List<Categoria> listarCategorias(){
 		return categoriaDAO.raizes();
+	}
+	
+	public List<Categoria> listarCategorias(CategoriaParaPesquisa categoriaParaPesquisa){
+		return categoriaDAO.subcategoriasDe(categoriaParaPesquisa.getDescricao());
 	}
 
 }
