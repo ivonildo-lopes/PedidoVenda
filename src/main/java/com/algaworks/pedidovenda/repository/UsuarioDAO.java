@@ -29,4 +29,16 @@ public class UsuarioDAO implements Serializable{
 		Query query = manager.createQuery(jpql,Usuario.class);
 		return query.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Usuario> pesquisar(String nome){
+		String jpql = "from Usuario u where u.nome like :nome ORDER BY nome ASC";
+		Query query = manager.createQuery(jpql,Usuario.class);
+		query.setParameter("nome","%"+nome+"%");
+		return query.getResultList();
+	}
+	
+	public Usuario salvar(Usuario usuario){
+		return manager.merge(usuario);
+	}
 }

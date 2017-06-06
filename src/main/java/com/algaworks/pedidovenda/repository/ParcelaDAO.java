@@ -35,6 +35,7 @@ public class ParcelaDAO implements Serializable {
 
 	@Transactional
 	public Parcela salvar(Parcela parcela) {
+		System.out.println(parcela.toString());
 		return this.manager.merge(parcela);
 	}
 }

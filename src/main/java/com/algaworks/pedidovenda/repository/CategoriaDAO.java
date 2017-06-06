@@ -39,4 +39,9 @@ public class CategoriaDAO implements Serializable {
 				Categoria.class).setParameter("raiz", categoriaPai).getResultList();
 	}
 	
+	public List<Categoria> subcategoriasDe(String descricao) {
+		return manager.createQuery("from Categoria where upper(descricao) like :descricao and categoriaPai is not null ORDER BY descricao ASC", 
+				Categoria.class).setParameter("descricao","%"+descricao.toUpperCase()+"%").getResultList();
+	}
+	
 }

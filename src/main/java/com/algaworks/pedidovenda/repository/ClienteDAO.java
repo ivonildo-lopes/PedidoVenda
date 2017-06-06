@@ -9,7 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
+
+//import org.apache.commons.lang.StringUtils;
 
 import com.algaworks.pedidovenda.model.Cliente;
 import com.algaworks.pedidovenda.model.Parcela;

@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,16 +18,11 @@ import javax.persistence.TemporalType;
 @Table(name="parcelas")
 public class Parcela implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
-	
-//
-//	private Long id_pedido;
 	
 	@ManyToOne
 	@JoinColumn(name="id_pedido",referencedColumnName="id")
@@ -40,7 +37,7 @@ public class Parcela implements Serializable {
 	@Column(name="data_vencimento")
 	private Date dataVencimento;
 	
-	private Boolean paga;
+	private Boolean paga = false;
 
 	public long getId() {
 		return id;
@@ -90,15 +87,4 @@ public class Parcela implements Serializable {
 		this.paga = paga;
 	}
 
-//	public Long getId_pedido() {
-//		return id_pedido;
-//	}
-//
-//	public void setId_pedido(Long id_pedido) {
-//		this.id_pedido = id_pedido;
-//	}
-	
-	
-	
-	
 }
