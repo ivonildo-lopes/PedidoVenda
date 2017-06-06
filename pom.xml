@@ -1,15 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+	http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.algaworks</groupId>
 	<artifactId>PedidoVenda</artifactId>
 	<version>0.0.1</version>
 	<packaging>war</packaging>
-
-	<!-- PROPERTIES -->
-	<!-- <properties> <javax.servlet.version>3.0.1</javax.servlet.version> <jsf.api.version>2.2.9</jsf.api.version> 
-		<jsf.impl.version>2.2.9</jsf.impl.version> <jstl.version>1.2</jstl.version> 
-		</properties> -->
 
 	<dependencies>
 		<!-- JAVAX SERVLET -->
@@ -41,12 +38,6 @@
 			<artifactId>primefaces</artifactId>
 			<version>6.0</version>
 		</dependency>
-
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.primefaces.themes</groupId> -->
-<!-- 			<artifactId>all-themes</artifactId> -->
-<!-- 			<version>1.0.10</version> -->
-<!-- 		</dependency> -->
 
 		<!-- log4j -->
 		<dependency>
@@ -112,31 +103,17 @@
 		</dependency>
 
 
-		<!-- abstração para envio de email -->
-		<!-- para funcionar essa dependencia fiz o projeto SIMPLE-EMAIL funcionar 
-			e fui na opção run-maven-build - coloquei install e marquei a opção skip 
-			test -->
-		<!-- <dependency> <groupId>com.outjected</groupId> <artifactId>simple-email</artifactId> 
-			<version>0.2.5-SNAPSHOT</version> <scope>compile</scope> </dependency> -->
-
-		<!-- Requerido para envio de email -->
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.7</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<version>1.7</version>
-		</dependency>
 
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.4-1201-jdbc41</version>
 		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>mysql</groupId> -->
+		<!-- <artifactId>mysql-connector-java</artifactId> -->
+		<!-- <version>5.1.38</version> -->
+		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -155,8 +132,6 @@
 			<artifactId>jasperreports</artifactId>
 			<version>5.2.0</version>
 		</dependency>
-		<!-- <dependency> <groupId>org.primefaces.themes</groupId> <artifactId>all-themes</artifactId> 
-			<version>1.0.10</version> </dependency> -->
 	</dependencies>
 
 	<build>
