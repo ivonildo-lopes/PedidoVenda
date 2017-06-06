@@ -17,9 +17,6 @@ import com.algaworks.pedidovenda.service.PedidoService;
 @ViewScoped
 public class PesquisaPedidosBean implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private PedidoParaPesquisa pedidoParaPesquisa;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 import javax.faces.bean.ViewScoped;
@@ -63,12 +64,12 @@ public class CadastroPedidoBean implements Serializable {
 	@Inject
 	private ParcelaDAO parcelaDAO;
 
-	private List<Parcela> parcelas = new ArrayList<>();
+	private static List<Parcela> parcelas = new ArrayList<>();
 
-	// @PostConstruct
-	// public void init(){
-	// parcelas = parcelaDAO.porPedido(pedido);
-	// }
+//	 @PostConstruct
+//	 public void init(){
+//	 parcelas = parcelaDAO.porPedido(pedido);
+//	 }
 
 	public CadastroPedidoBean() {
 		Limpar();
@@ -232,6 +233,6 @@ public class CadastroPedidoBean implements Serializable {
 	}
 
 	public List<Parcela> getParcelas() {
-		return parcelas;
+		return parcelas = parcelaDAO.porPedido(pedido);
 	}
 }
