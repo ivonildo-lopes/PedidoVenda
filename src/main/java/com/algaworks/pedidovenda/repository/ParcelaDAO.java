@@ -13,10 +13,8 @@ import com.algaworks.pedidovenda.util.jpa.Transactional;
 
 public class ParcelaDAO implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Inject
 	private EntityManager manager;
 
@@ -30,7 +28,6 @@ public class ParcelaDAO implements Serializable {
 		Query query = manager.createQuery(jpql);
 		query.setParameter("id", pedido.getId());
 		return query.getResultList();
-
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -51,7 +48,6 @@ public class ParcelaDAO implements Serializable {
 
 	@Transactional
 	public Parcela salvar(Parcela parcela) {
-		System.out.println(parcela.toString());
 		return this.manager.merge(parcela);
 	}
 }

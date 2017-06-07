@@ -8,7 +8,9 @@ import javax.inject.Named;
 
 import com.algaworks.pedidovenda.model.Parcela;
 import com.algaworks.pedidovenda.model.Pedido;
+import com.algaworks.pedidovenda.model.StatusPedido;
 import com.algaworks.pedidovenda.service.ParcelaService;
+import com.algaworks.pedidovenda.util.jsf.FacesUtil;
 import com.algaworks.pedidovenda.validation.PedidoEdicao;
 
 @Named
@@ -26,11 +28,11 @@ public class ParcelaController implements Serializable {
 	
 	public void salvar(Parcela parcela) {
 		System.out.println(parcela.toString());
-		//if(pedido.getStatus() == StatusPedido.EMITIDO){
+		if(parcela.getPedido().getStatus() == StatusPedido.EMITIDO){
 			parcela = parcelaService.salvar(parcela);
-		//}else{
-			//FacesUtil.AvisoMessage("O pedido não esta emitido por isso a parcela não pode ser quitada");
-		//}
+		}else{
+			FacesUtil.AvisoMessage("O pedido não esta emitido por isso a parcela não pode ser paga");
+		}
 			
 	}
 

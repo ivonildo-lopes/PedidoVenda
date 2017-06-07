@@ -15,8 +15,6 @@ public class ParcelaService implements Serializable {
 	
 	@Inject
 	private ParcelaDAO parcelaDAO;
-	
-
 
 	@Transactional
 	public Parcela salvar(Parcela parcela) {
