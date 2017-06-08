@@ -10,13 +10,36 @@
 	<ui:define name="corpo">
 
 		<h:form>
+
 			
-			<center>
-				<p:graphicImage library="images" name="logo_hinod.png"/>
-			</center>
+			<div class="container">
+				<h1>Aniversariantes do dia</h1>
+				<table class="table table-striped">
+
+					<thead>
+						<tr>
+							<th>NOME</th>
+							<th>DATA</th>
+						</tr>
+
+					</thead>
+
+					<ui:repeat var="cli" value="#{homeBean.listaClientes}"
+						varStatus="status">
+						<tbody>
+							<tr>
+								<td>#{cli.nome}</td>
+								<td>#{cli.dataNascimento}</td>
+
+							</tr>
+						</tbody>
+					</ui:repeat>
+
+				</table>
+			</div>
 
 		</h:form>
-		
+
 	</ui:define>
 
 </ui:composition>

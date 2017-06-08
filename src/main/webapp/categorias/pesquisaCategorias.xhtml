@@ -32,30 +32,23 @@
 				<p:outputLabel value="Descricao" />
 				<p:inputText size="40" styleClass="up"
 					value="#{pesquisaCategoriaBean.categoriaParaPesquisa.descricao}" />
-			
+
 			</p:panelGrid>
 
 			<p:dataTable id="tabelaCliente"
 				value="#{pesquisaCategoriaBean.listaCategoria}" var="categoria"
-				style="margin-top: 20px" emptyMessage="Nenhuma categoria encontrada."
-				rows="20" paginator="true" paginatorAlwaysVisible="false"
+				style="margin-top: 20px"
+				emptyMessage="Nenhuma categoria encontrada." rows="20"
+				paginator="true" paginatorAlwaysVisible="false"
 				paginatorPosition="bottom">
 
 				<p:column headerText="Sub-Categoria">
 					<h:outputText value="#{categoria.descricao}" />
 				</p:column>
-				
+
 				<p:column headerText="Categoria">
 					<h:outputText value="#{categoria.categoriaPai.descricao}" />
 				</p:column>
-
-<!-- 				<p:column headerText="Valor Pendente" -->
-<!-- 				style="text-align: right; width: 120px"> -->
-<!-- 					<h:outputText  -->
-<!-- 						value="#{pesquisaClienteBean.porValorPendente(cliente)}"> -->
-<!-- 						<f:convertNumber type="currency" /> -->
-<!-- 					</h:outputText> -->
-<!-- 				</p:column> -->
 
 				<p:column style="text-align: center; width: 50px">
 					<p:button icon="ui-icon-pencil" title="Editar"
@@ -65,14 +58,7 @@
 				</p:column>
 			</p:dataTable>
 
-
-
-
-
-
 		</h:form>
-
-
 
 	</ui:define>
 </ui:composition>

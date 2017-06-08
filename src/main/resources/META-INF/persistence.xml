@@ -8,7 +8,7 @@
 		<class>com.algaworks.pedidovenda.model.Categoria</class>
 
 		<properties>
-			<property name="hibernate.connection.username" value="postgres" />
+			<property name="hibernate.connection.username" value="adminvendas" />
 			<property name="hibernate.connection.password" value="admin@123" />
 			<property name="hibernate.connection.autocommit" value="false" />
 	
