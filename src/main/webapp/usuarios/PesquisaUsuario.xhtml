@@ -42,10 +42,10 @@
 				paginatorPosition="bottom">
 
 				<p:column headerText="Usuario">
-					<h:outputText value="#{usuario.nome}" />
+					<h:outputText value="#{usuario.nome.toUpperCase()}" />
 				</p:column>
 				<p:column headerText="E-mail">
-					<h:outputText value="#{usuario.email}" />
+					<h:outputText value="#{usuario.email.toUpperCase()}" />
 				</p:column>
 
 				<p:column style="text-align: center; width: 50px">

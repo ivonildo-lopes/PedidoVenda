@@ -13,55 +13,61 @@
 	<h:outputStylesheet library="css" name="bootstrap.css" />
 	<h:outputScript library="js" name="jquery.maskMoney.js" />
 	<h:outputScript library="js" name="bootstrap.js" />
+	
 
 	<script>
-		PrimeFaces.locales['pt'] = { 
-	    closeText: 'Fechar', 
-		prevText: 'Anterior', 
-		nextText: 'Próximo', 
-		currentText: 'Começo', 
-		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'], 
-		monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'], 
-		dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'], 
-		dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'], 
-		dayNamesMin: ['D','S','T','Q','Q','S','S'], 
-		weekHeader: 'Semana', 
-		firstDay: 0, 
-		isRTL: false, 
-		showMonthAfterYear: false, 
-		yearSuffix: '', 
-		timeOnlyTitle: 'Só Horas', 
-		timeText: 'Tempo', 
-		hourText: 'Hora', 
-		minuteText: 'Minuto', 
-		secondText: 'Segundo', 
-		ampm: false, 
-		month: 'Mês', 
-		week: 'Semana', 
-		day: 'Dia', 
-		allDayText : 'Todo o Dia' };
+		PrimeFaces.locales['pt'] = {
+			closeText : 'Fechar',
+			prevText : 'Anterior',
+			nextText : 'Próximo',
+			currentText : 'Começo',
+			monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
+					'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+					'Novembro', 'Dezembro' ],
+			monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+					'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+			dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+					'Sexta', 'Sábado' ],
+			dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
+			dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+			weekHeader : 'Semana',
+			firstDay : 0,
+			isRTL : false,
+			showMonthAfterYear : false,
+			yearSuffix : '',
+			timeOnlyTitle : 'Só Horas',
+			timeText : 'Tempo',
+			hourText : 'Hora',
+			minuteText : 'Minuto',
+			secondText : 'Segundo',
+			ampm : false,
+			month : 'Mês',
+			week : 'Semana',
+			day : 'Dia',
+			allDayText : 'Todo o Dia'
+		};
 		jQuery(document).ready(function(jQuery) {
-		    // Chamada da funcao upperText(); ao carregar a pagina
-		    upperText();
+			// Chamada da funcao upperText(); ao carregar a pagina
+			upperText();
 		});
 		// Funcao que faz o texto ficar em uppercase
 		function upperText() {
-		    // Para tratar o colar
-		    jQuery(".up").bind('paste', function(e) {
-		        var el = jQuery(this);
-		        setTimeout(function() {
-		            var text = jQuery(el).val();
-		            el.val(text.toUpperCase());
-		        }, 100);
-		    });
-		    // Para tratar quando é digitado
-		jQuery(".up").keypress(function() {
-		    var el = jQuery(this);
-		    setTimeout(function() {
-		        var text = jQuery(el).val();
-		        el.val(text.toUpperCase());
-		    }, 100);
-		});
+			// Para tratar o colar
+			jQuery(".up").bind('paste', function(e) {
+				var el = jQuery(this);
+				setTimeout(function() {
+					var text = jQuery(el).val();
+					el.val(text.toUpperCase());
+				}, 100);
+			});
+			// Para tratar quando é digitado
+			jQuery(".up").keypress(function() {
+				var el = jQuery(this);
+				setTimeout(function() {
+					var text = jQuery(el).val();
+					el.val(text.toUpperCase());
+				}, 100);
+			});
 		}
 	</script>
 
@@ -99,7 +105,7 @@
 						outcome="/categorias/cadastroCategoria" />
 					<p:menuitem value="Produtos" outcome="/produtos/CadastroProduto" />
 				</p:submenu>
-				
+
 				<p:submenu label="Consultas">
 					<p:menuitem value="Clientes" outcome="/clientes/PesquisaClientes" />
 					<p:menuitem value="Usuários" outcome="/usuarios/PesquisaUsuario" />
@@ -108,7 +114,7 @@
 						outcome="/categorias/pesquisaCategorias" />
 					<p:menuitem value="Produtos" outcome="/produtos/PesquisaProdutos" />
 				</p:submenu>
-				
+
 				<p:submenu label="Pedidos">
 					<p:menuitem value="Novo pedido" outcome="/pedidos/CadastroPedido" />
 					<p:menuitem value="Pesquisa" outcome="/pedidos/PesquisaPedidos" />
@@ -116,10 +122,11 @@
 				<p:submenu label="Relatórios">
 					<p:menuitem value="Pedidos Emitidos"
 						outcome="/relatorios/RelatorioPedidosEmitidos" />
+					<p:menuitem value="Produtos no Estoque"
+						outcome="/relatorios/RelatorioProdutosEstoque" />
 				</p:submenu>
 				<p:submenu label="Sobre">
-					<p:menuitem value="Sobre o sistema"
-						outcome="/sobre" />
+					<p:menuitem value="Sobre o sistema" outcome="/sobre" />
 				</p:submenu>
 
 				<p:menuitem value="Sair" />
@@ -135,17 +142,23 @@
 
 	<p:separator style="margin-top: 20px" />
 
-	<footer> Sistema Desenvolvido por <b>Ivonildo Lopes Rodrigues </b> </footer>
+	<footer> Sistema Desenvolvido por <b>Ivonildo Lopes
+		Rodrigues </b>
+	</footer>
 
 	<script>
-			function configurarMoeda() {
-				$(".moeda").maskMoney({ decimal: ",", thousands: ".", allowZero: true });
-			}
-			
-			$(document).ready(function() {
-				configurarMoeda();
+		function configurarMoeda() {
+			$(".moeda").maskMoney({
+				decimal : ",",
+				thousands : ".",
+				allowZero : true
 			});
-		</script>
+		}
+
+		$(document).ready(function() {
+			configurarMoeda();
+		});
+	</script>
 </h:body>
 
 </html>

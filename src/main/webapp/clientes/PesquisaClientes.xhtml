@@ -46,10 +46,10 @@
 				paginatorPosition="bottom">
 
 				<p:column headerText="Cliente">
-					<h:outputText value="#{cliente.nome}" />
+					<h:outputText value="#{cliente.nome.toUpperCase()}" />
 				</p:column>
 				<p:column headerText="E-mail">
-					<h:outputText value="#{cliente.email}" />
+					<h:outputText value="#{cliente.email.toUpperCase()}" />
 				</p:column>
 				<p:column headerText="Data de Nascimento"
 					style="text-align: center; width: 140px">
@@ -60,7 +60,7 @@
 
 				<p:column headerText="Valor Pendente"
 				style="text-align: right; width: 120px">
-					<h:outputText 
+					<h:outputText style="color: #{pesquisaClienteBean.verificaPendenciaParcela(cliente) ?  'red' : ''}" 
 						value="#{pesquisaClienteBean.porValorPendente(cliente)}">
 						<f:convertNumber type="currency" />
 					</h:outputText>

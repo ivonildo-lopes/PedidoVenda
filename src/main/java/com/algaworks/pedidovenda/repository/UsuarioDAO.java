@@ -32,9 +32,9 @@ public class UsuarioDAO implements Serializable{
 	
 	@SuppressWarnings("unchecked")
 	public List<Usuario> pesquisar(String nome){
-		String jpql = "from Usuario u where u.nome like :nome ORDER BY nome ASC";
+		String jpql = "from Usuario u where upper(u.nome) like :nome ORDER BY nome ASC";
 		Query query = manager.createQuery(jpql,Usuario.class);
-		query.setParameter("nome","%"+nome+"%");
+		query.setParameter("nome","%" + nome.toUpperCase() + "%");
 		return query.getResultList();
 	}
 	

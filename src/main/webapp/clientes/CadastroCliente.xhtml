@@ -35,25 +35,29 @@
 
 				<p:outputLabel value="Nome" for="nome" />
 				<p:inputText id="nome" size="90" styleClass="up"
-					value="#{cadastroClienteBean.cliente.nome}" />
+					value="#{cadastroClienteBean.cliente.nome}" 
+					placeholder="Informe o nome do Cliente"/>
 
 				<p:outputLabel value="Email" for="email" />
 				<p:inputText id="email" size="90" styleClass="up"
-					value="#{cadastroClienteBean.cliente.email}" />
+					value="#{cadastroClienteBean.cliente.email}" 
+					placeholder="Informe o email do Cliente"/>
 
 				<p:outputLabel value="CPF" for="cpf" />
 				<p:inputMask id="cpf" size="40" mask="999.999.999-99"
-					value="#{cadastroClienteBean.cliente.documentoReceitaFederal}" />
+					value="#{cadastroClienteBean.cliente.documentoReceitaFederal}"
+					placeholder="Informe o CPF do Cliente" />
 
 				<p:outputLabel value="Data Nascimento" for="data" />
 				<p:calendar id="data" mask="99/99/9999" locale="pt"
 					value="#{cadastroClienteBean.cliente.dataNascimento}"
 					navigator="true" pattern="dd/MM/yyyy"
-					maxdate="#{cadastroClienteBean.dataHoje()}" />
+					maxdate="#{cadastroClienteBean.dataHoje()}"
+					placeholder="Informe a Data Nascimento do Cliente" />
 
 
 				<p:outputLabel value="Tipo" for="tipo" />
-				<p:selectOneMenu id="tipo"
+				<p:selectOneMenu id="tipo" 
 					value="#{cadastroClienteBean.cliente.tipo}">
 					<f:selectItem itemLabel="Selecione" />
 					<f:selectItems value="#{cadastroClienteBean.tipoPessoaFisica}" />

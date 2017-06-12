@@ -34,14 +34,22 @@ public class PesquisaClienteBean implements Serializable {
 	public void pesquisar() {
 		listaCliente = clienteService.pesquisar(clienteParaPesquisa);
 	}
-	
-	public void remover(Cliente cliente){
+
+	public void remover(Cliente cliente) {
 		clienteService.remover(cliente);
 		listaCliente.remove(cliente);
 	}
-	
-	public double porValorPendente(Cliente cliente){
+
+	public double porValorPendente(Cliente cliente) {
 		return clienteService.porValorPendente(cliente);
+	}
+
+	public boolean verificaPendenciaParcela(Cliente cliente){
+		if(porValorPendente(cliente) > 0)
+			return true;
+
+		return false;			
+		
 	}
 
 	// GET AND SET

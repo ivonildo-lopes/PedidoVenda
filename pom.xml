@@ -130,7 +130,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>5.2.0</version>
+			<version>5.6.0</version>
 		</dependency>
 	</dependencies>
 
