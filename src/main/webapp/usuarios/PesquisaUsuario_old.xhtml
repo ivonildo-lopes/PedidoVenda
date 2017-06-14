@@ -1,0 +1,69 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa Usuario</ui:define>
+
+	<ui:define name="corpo">
+
+		<h:form>
+			<p:messages autoUpdate="true" closable="true" />
+
+			<h1>Pesquisa de Usuarios</h1>
+
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisa"
+						action="#{pesquisaUsuarioBean.pesquisar()}" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/usuarios/CadastroUsuario" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="nome" />
+				<p:inputText size="40" styleClass="up"
+					value="#{pesquisaUsuarioBean.usuarioParaPesquisa.nome}" />
+
+			</p:panelGrid>
+
+			<p:dataTable id="tabelaUsuario"
+				value="#{pesquisaUsuarioBean.listaUsuario}" var="usuario"
+				style="margin-top: 20px" emptyMessage="Nenhum Usuario encontrado."
+				rows="20" paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+
+				<p:column headerText="Usuario">
+					<h:outputText value="#{usuario.nome.toUpperCase()}" />
+				</p:column>
+				<p:column headerText="E-mail">
+					<h:outputText value="#{usuario.email.toUpperCase()}" />
+				</p:column>
+
+				<p:column style="text-align: center; width: 50px">
+					<p:button icon="ui-icon-pencil" title="Editar"
+						outcome="/usuarios/CadastroUsuario">
+						<f:param name="usuario" value="#{usuario.id}" />
+					</p:button>
+				</p:column>
+			</p:dataTable>
+
+
+
+
+
+
+		</h:form>
+
+
+
+	</ui:define>
+</ui:composition>

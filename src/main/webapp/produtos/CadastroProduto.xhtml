@@ -33,49 +33,51 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<p:panelGrid columns="2" id="painel"
-				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
-				<p:outputLabel value="SKU" for="sku" />
-				<p:inputText id="sku" size="20" maxlength="20" styleClass="up"
-					value="#{cadastroProdutoBean.produto.sku}" />
+			<div class="ui-fluid">
+				<p:panelGrid columns="2" id="painel"
+					columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
+					styleClass="ui-panelgrid-blank">
+					<p:outputLabel value="SKU" for="sku" />
+					<h:panelGroup>
+						<p:inputMask id="sku" maxlength="20" mask="aa9999"
+							placeholder="Ex.: AZ1289" size="20"
+							value="#{cadastroProdutoBean.produto.sku}" />
+						<p:outputLabel value="O SKU deve conter duas letras e 4 numeros" />
+					</h:panelGroup>
 
-				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" size="60" maxlength="80"
-					value="#{cadastroProdutoBean.produto.nome}" styleClass="up" />
+					<p:outputLabel value="Nome" for="nome" />
+					<p:inputText id="nome" maxlength="80"
+						placeholder="Informe o nome do produto"
+						value="#{cadastroProdutoBean.produto.nome}" styleClass="up" />
 
-				<p:outputLabel value="Categoria" for="categoria" />
-				<p:selectOneMenu id="categoria" converter="categoriaConverter"
-					value="#{cadastroProdutoBean.categoriaPai}">
-					<f:selectItem itemLabel="Selecione a categoria" />
-					<f:selectItems value="#{cadastroProdutoBean.categoriasRaizes}" />
-					<p:ajax listener="#{cadastroProdutoBean.carregarSubcategorias}"
-						update="subcategoria" />
-				</p:selectOneMenu>
+					<p:outputLabel value="Categoria" for="categoria" />
+					<p:selectOneMenu id="categoria" converter="categoriaConverter"
+						value="#{cadastroProdutoBean.categoriaPai}">
+						<f:selectItem itemLabel="Selecione a categoria" />
+						<f:selectItems value="#{cadastroProdutoBean.categoriasRaizes}" />
+						<p:ajax listener="#{cadastroProdutoBean.carregarSubcategorias}"
+							update="subcategoria" />
+					</p:selectOneMenu>
 
-				<p:outputLabel value="Subcategoria" for="subcategoria" />
-				<p:selectOneMenu id="subcategoria" converter="categoriaConverter"
-					value="#{cadastroProdutoBean.produto.categoria}">
-					<f:selectItem itemLabel="Selecione a subcategoria" />
-					<f:selectItems value="#{cadastroProdutoBean.subcategorias}" />
-				</p:selectOneMenu>
+					<p:outputLabel value="Subcategoria" for="subcategoria" />
+					<p:selectOneMenu id="subcategoria" converter="categoriaConverter"
+						value="#{cadastroProdutoBean.produto.categoria}">
+						<f:selectItem itemLabel="Selecione a subcategoria" />
+						<f:selectItems value="#{cadastroProdutoBean.subcategorias}" />
+					</p:selectOneMenu>
 
-				<p:outputLabel value="Valor unitário" for="valorUnitario" />
-				<p:inputText id="valorUnitario" size="10" maxlength="10"
-					styleClass="moeda"
-					value="#{cadastroProdutoBean.produto.valorUnitario}">
-					<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
-				</p:inputText>
+					<p:outputLabel value="Valor unitário" for="valorUnitario" />
+					<p:inputText id="valorUnitario" maxlength="10" styleClass="moeda"
+						placeholder="R$ 0,00"
+						value="#{cadastroProdutoBean.produto.valorUnitario}">
+						<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+					</p:inputText>
 
-				<p:outputLabel value="Estoque" for="estoque" />
-				<p:inputText id="estoque" size="10" maxlength="5"
-					value="#{cadastroProdutoBean.produto.quantidadeEstoque}" />
-
-				<p:outputLabel value="Imagem" for="imagem" rendered="FALSE"/>
-				<p:editor id="imagem" widgetVar="editorWidget" rendered="FALSE"
-					value="#{cadastroProdutoBean.produto.imagem}" styleClass="up" width="300" />
-
-
-			</p:panelGrid>
+					<p:outputLabel value="Estoque" for="estoque" />
+					<p:inputText id="estoque" maxlength="5"
+						value="#{cadastroProdutoBean.produto.quantidadeEstoque}" />
+				</p:panelGrid>
+			</div>
 		</h:form>
 	</ui:define>
 </ui:composition>

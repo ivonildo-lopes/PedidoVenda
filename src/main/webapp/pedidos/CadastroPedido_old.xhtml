@@ -1,0 +1,80 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:o="http://omnifaces.org/ui">
+
+	<f:metadata>
+		<o:viewParam name="pedido" value="#{cadastroPedidoBean.pedido}" />
+		<f:event listener="#{cadastroPedidoBean.inicializar()}"
+			type="preRenderView" />
+	</f:metadata>
+
+
+	<ui:define name="titulo">#{cadastroPedidoBean.editando ? "Edição de Pedido" : "Novo Pedido"}</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frmCadastroPedido">
+			<h1>#{cadastroPedidoBean.editando ? "Edição de Pedido" : "Novo Pedido"}</h1>
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<ui:include src="/WEB-INF/template/pedidos/BotoesPedido.xhtml" />
+
+			<ui:include src="/WEB-INF/template/pedidos/CapaPedido.xhtml" />
+
+			<p:tabView style="margin-top: 20px">
+				<p:tab title="Itens">
+					<ui:include src="/WEB-INF/template/pedidos/ItensPedido.xhtml" /> 
+				</p:tab>
+				<p:tab title="Dados de entrega">
+					<ui:include
+						src="/WEB-INF/template/pedidos/DadosEntregaPedido.xhtml" />
+				</p:tab>
+				<p:tab title="Observação">
+					<ui:include src="/WEB-INF/template/pedidos/ObservacaoPedido.xhtml" />
+				</p:tab>
+			</p:tabView>
+	
+			 <p:growl id="mss"  />
+		
+			<p:dataTable id="tabela"
+				value="#{cadastroPedidoBean.parcelas}" var="parcela"
+				style="margin-top: 20px;font-size:10px"
+				emptyMessage="Esse pedido não foi parcelado." rows="5" paginator="true"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom">
+
+				<p:column headerText="Descricao" style="text-align: center; width: 100px">
+					<h:outputText value="#{parcela.descricao}" styleClass="up" />
+				</p:column>
+				
+				<p:column headerText="Valor da parcela" style="text-align: center; width: 100px">
+					<h:outputText value="#{parcela.valorParcela}" >
+						<f:convertNumber type="currency"/>
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Vencimento" style="text-align: center; width: 100px">
+					<h:outputText value="#{parcela.dataVencimento}" >
+						<f:convertDateTime pattern="dd/MMMM/yyyy"/>
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="quitada" style="text-align: center; width: 100px">
+					<h:outputText value="#{parcela.paga ? 'PARCELA PAGA ':' A PAGAR'}" id="stt"
+					style="color: #{!parcela.paga ?  'red' : 'green'}"/>
+				</p:column>
+	
+				<p:column headerText="ação" style="text-align: center; width: 100px">
+					<p:commandButton id="botao" action="#{parcelaController.salvar(parcela)}" value="receber" update="stt,botao,frmCadastroPedido:tabela"
+					rendered="#{!parcela.paga}"/>		
+				</p:column>
+				
+			</p:dataTable>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>

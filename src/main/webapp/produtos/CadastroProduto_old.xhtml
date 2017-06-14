@@ -1,0 +1,86 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">#{cadastroProdutoBean.verificaEdicao() ? 'Edição de Produto' : 'Novo Produto'}</ui:define>
+
+	<ui:define name="corpo">
+
+
+		<f:metadata>
+			<o:viewParam name="produto" value="#{cadastroProdutoBean.produto}" />
+			<f:event listener="#{cadastroProdutoBean.inicializar}"
+				type="preRenderView" />
+		</f:metadata>
+
+		<h:form>
+			<h1>#{cadastroProdutoBean.verificaEdicao() ? 'Edição de Produto'
+				: 'Novo Produto'}</h1>
+
+			<p:messages autoUpdate="true" closable="true" id="msg" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/produtos/CadastroProduto" />
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						action="#{cadastroProdutoBean.salvar}" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="/produtos/PesquisaProdutos" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+				<p:outputLabel value="SKU" for="sku" />
+				<h:panelGroup>
+					<p:inputMask id="sku" size="20" maxlength="20" mask="aa9999"
+						placeholder="Ex.: AZ1289"
+						value="#{cadastroProdutoBean.produto.sku}" />
+					<p:outputLabel value="O SKU deve conter duas letras e 4 numeros"/>	
+				</h:panelGroup>
+
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="60" maxlength="80" placeholder="Informe o nome do produto"
+					value="#{cadastroProdutoBean.produto.nome}" styleClass="up" />
+
+				<p:outputLabel value="Categoria" for="categoria" />
+				<p:selectOneMenu id="categoria" converter="categoriaConverter"
+					value="#{cadastroProdutoBean.categoriaPai}">
+					<f:selectItem itemLabel="Selecione a categoria" />
+					<f:selectItems value="#{cadastroProdutoBean.categoriasRaizes}" />
+					<p:ajax listener="#{cadastroProdutoBean.carregarSubcategorias}"
+						update="subcategoria" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Subcategoria" for="subcategoria" />
+				<p:selectOneMenu id="subcategoria" converter="categoriaConverter"
+					value="#{cadastroProdutoBean.produto.categoria}">
+					<f:selectItem itemLabel="Selecione a subcategoria" />
+					<f:selectItems value="#{cadastroProdutoBean.subcategorias}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Valor unitário" for="valorUnitario" />
+				<p:inputText id="valorUnitario" size="10" maxlength="10"
+					styleClass="moeda" placeholder="R$ 0,00"
+					value="#{cadastroProdutoBean.produto.valorUnitario}">
+					<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+				</p:inputText>
+
+				<p:outputLabel value="Estoque" for="estoque" />
+				<p:inputText id="estoque" size="10" maxlength="5"
+					value="#{cadastroProdutoBean.produto.quantidadeEstoque}" />
+
+				<p:outputLabel value="Imagem" for="imagem" rendered="FALSE" />
+				<p:editor id="imagem" widgetVar="editorWidget" rendered="FALSE"
+					value="#{cadastroProdutoBean.produto.imagem}" styleClass="up"
+					width="300" />
+
+
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

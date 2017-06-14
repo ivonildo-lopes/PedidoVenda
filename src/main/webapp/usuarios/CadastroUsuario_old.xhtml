@@ -30,28 +30,23 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<div class="ui-fluid">
-				<p:panelGrid columns="2"
-					columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
-					styleClass="ui-panelgrid-blank">
+			<p:panelGrid columns="2" columnClasses="rotulo, campo"
+				style="width: 100%; margin-top: 20px">
 
-					<p:outputLabel value="Nome" for="nome" />
-					<p:inputText id="nome" size="90" styleClass="up"
-						value="#{cadastroUsuarioBean.usuario.nome}"
-						placeholder="Informe o nome do Usuario" />
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="90" styleClass="up"
+					value="#{cadastroUsuarioBean.usuario.nome}" />
 
-					<p:outputLabel value="Email" for="email" />
-					<p:inputText id="email" size="90" styleClass="up"
-						value="#{cadastroUsuarioBean.usuario.email}"
-						placeholder="Informe o email do Usuario" />
+				<p:outputLabel value="Email" for="email" />
+				<p:inputText id="email" size="90" styleClass="up"
+					value="#{cadastroUsuarioBean.usuario.email}" />
 
-					<p:outputLabel value="Senha" for="senha" />
-					<p:password id="senha" size="40"
-						value="#{cadastroUsuarioBean.usuario.senha}"
-						placeholder="Informe a senha" />
+				<p:outputLabel value="Senha" for="senha" />
+				<p:password id="senha" size="40"
+					value="#{cadastroUsuarioBean.usuario.senha}" />
 
-				</p:panelGrid>
-			</div>
+			</p:panelGrid>
+
 
 		</h:form>
 

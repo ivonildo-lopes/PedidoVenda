@@ -33,44 +33,51 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<p:outputLabel value="Cadastrar Subcategoria? "
-				style="margin-top:30px" />
-			<p:selectBooleanCheckbox
-				value="#{cadastroCategoriaBean.adionarSubCategoria}"
-				style="margin-top:30px">
-				<p:ajax event="change" process="@this" update="@form painel1" />
-			</p:selectBooleanCheckbox>
+			<div class="ui-fluid">
+				<p:outputLabel value="Cadastrar Subcategoria? "
+					style="margin-top:30px" />
 
-			<p:panelGrid columns="2" columnClasses="rotulo, campo"
-				style="width: 100%; margin-top: 20px" id="painel1"
-				rendered="#{!cadastroCategoriaBean.adionarSubCategoria}">
+				<p:selectBooleanCheckbox
+					value="#{cadastroCategoriaBean.adionarSubCategoria}"
+					style="margin-top:30px">
+					<p:ajax event="change" process="@this" update="@form painel1" />
+				</p:selectBooleanCheckbox>
 
-				<p:outputLabel value="Categoria" for="categoria" />
-				<p:inputText id="categoria" size="90" styleClass="up"
-					value="#{cadastroCategoriaBean.categoria.descricao}" />
 
-			</p:panelGrid>
+				<p:panelGrid columns="2" id="painel1"
+					columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
+					styleClass="ui-panelgrid-blank"
+					rendered="#{!cadastroCategoriaBean.adionarSubCategoria}">
 
-			<p:panelGrid columns="2" columnClasses="rotulo, campo"
-				style="width: 100%; margin-top: 20px" id="painel2"
-				rendered="#{cadastroCategoriaBean.adionarSubCategoria}">
+					<p:outputLabel value="Categoria" for="categoria" />
+					<p:inputText id="categoria"
+						value="#{cadastroCategoriaBean.categoria.descricao}" />
 
-				<p:outputLabel value="SubCategoria" for="subcategoria" />
-				<p:inputText id="subcategoria" size="90" styleClass="up"
-					value="#{cadastroCategoriaBean.categoria.descricao}" />
+				</p:panelGrid>
+			</div>
 
-				<p:outputLabel value="Categoria" for="categoria1" />
-				<p:selectOneMenu
-					value="#{cadastroCategoriaBean.categoria.categoriaPai}"
-					id="categoria1" converter="categoriaConverter" required="true"
-					requiredMessage="Informe a Categoria para a Sub-Categoria"
-					filter="true" effect="fade">
-					<f:selectItem itemLabel="Selecione uma Categoria" />
-					<f:selectItems value="#{cadastroCategoriaBean.listaCategoria}" />
-				</p:selectOneMenu>
+			<div class="ui-fluid">
+				<p:panelGrid columns="2" id="painel2"
+					columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
+					styleClass="ui-panelgrid-blank"
+					rendered="#{cadastroCategoriaBean.adionarSubCategoria}">
 
-			</p:panelGrid>
+					<p:outputLabel value="SubCategoria" for="subcategoria" />
+					<p:inputText id="subcategoria" styleClass="up"
+						value="#{cadastroCategoriaBean.categoria.descricao}" />
 
+					<p:outputLabel value="Categoria" for="categoria1" />
+					<p:selectOneMenu
+						value="#{cadastroCategoriaBean.categoria.categoriaPai}"
+						id="categoria1" converter="categoriaConverter" required="true"
+						requiredMessage="Informe a Categoria para a Sub-Categoria"
+						filter="true" effect="fade">
+						<f:selectItem itemLabel="Selecione uma Categoria" />
+						<f:selectItems value="#{cadastroCategoriaBean.listaCategoria}" />
+					</p:selectOneMenu>
+
+				</p:panelGrid>
+			</div>
 		</h:form>
 
 

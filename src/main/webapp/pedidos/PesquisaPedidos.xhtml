@@ -21,131 +21,135 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<p:panelGrid columns="2" id="painel"
-				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
-				<p:outputLabel value="Número" />
-				<h:panelGroup>
-					<p:inputText size="10"
-						value="#{pesquisaPedidosBean.pedidoParaPesquisa.numeroDe}" />
+			<div class="ui-fluid">
+				<p:panelGrid columns="2" id="painel"
+					style="width: 100%; margin-top: 20px">
+					<p:outputLabel value="Número" />
+					<h:panelGroup>
+						<p:inputText size="10" placeholder="Informe o numero de um pedido"
+							value="#{pesquisaPedidosBean.pedidoParaPesquisa.numeroDe}" />
 	    			a
 	    			<p:inputText size="10"
-						value="#{pesquisaPedidosBean.pedidoParaPesquisa.numeroAte}" />
-				</h:panelGroup>
+							placeholder="Informe o numero de outro pedido"
+							value="#{pesquisaPedidosBean.pedidoParaPesquisa.numeroAte}" />
+					</h:panelGroup>
 
-				<p:outputLabel value="Data de criação" />
-				<h:panelGroup>
-					<p:calendar size="10" pattern="dd/MM/yyyy" locale="pt"
-						value="#{pesquisaPedidosBean.pedidoParaPesquisa.dataCriacaoDe}" />
+					<p:outputLabel value="Data de criação" />
+					<h:panelGroup>
+						<p:calendar size="10" pattern="dd/MM/yyyy" locale="pt"
+							value="#{pesquisaPedidosBean.pedidoParaPesquisa.dataCriacaoDe}"
+							placeholder="Informe uma data inicial" />
 	    			a
 	    			<p:calendar size="10" pattern="dd/MM/yyyy" locale="pt"
-						value="#{pesquisaPedidosBean.pedidoParaPesquisa.dataCriacaoAte}" />
-				</h:panelGroup>
+							value="#{pesquisaPedidosBean.pedidoParaPesquisa.dataCriacaoAte}"
+							placeholder="Informe uma data final" />
+					</h:panelGroup>
 
-				<p:outputLabel value="Vendedor" />
-				<p:inputText size="40" styleClass="up"
-					value="#{pesquisaPedidosBean.pedidoParaPesquisa.nomeVendedor}" />
+					<p:outputLabel value="Vendedor" />
+					<p:inputText size="40" styleClass="up"
+						placeholder="Pesquisar por venderdor"
+						value="#{pesquisaPedidosBean.pedidoParaPesquisa.nomeVendedor}" />
 
-				<p:outputLabel value="Cliente" />
-				<p:inputText size="40" styleClass="up"
-					value="#{pesquisaPedidosBean.pedidoParaPesquisa.nomeCliente}" />
+					<p:outputLabel value="Cliente" />
+					<p:inputText size="40" styleClass="up"
+						placeholder="Pesquisar por Cliente"
+						value="#{pesquisaPedidosBean.pedidoParaPesquisa.nomeCliente}" />
 
-				<p:outputLabel value="Status" />
-				<p:selectManyCheckbox
-					value="#{pesquisaPedidosBean.pedidoParaPesquisa.statuses}">
-					<f:selectItems value="#{pesquisaPedidosBean.statuses}" var="status"
-						itemValue="#{status}" itemLabel="#{status.descricao}" />
-				</p:selectManyCheckbox>
-			</p:panelGrid>
+					<p:outputLabel value="Status" />
+					<p:selectManyCheckbox
+						value="#{pesquisaPedidosBean.pedidoParaPesquisa.statuses}">
+						<f:selectItems value="#{pesquisaPedidosBean.statuses}"
+							var="status" itemValue="#{status}"
+							itemLabel="#{status.descricao}" />
+					</p:selectManyCheckbox>
+				</p:panelGrid>
 
-			<p:dataTable id="pedidosTable"
-				value="#{pesquisaPedidosBean.pedidosFiltrados}" var="pedido"
-				style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
-				rows="5" paginator="true" paginatorAlwaysVisible="false"
-				paginatorPosition="bottom">
+				<p:dataTable id="pedidosTable" reflow="true"
+					value="#{pesquisaPedidosBean.pedidosFiltrados}" var="pedido"
+					style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
+					rows="5" paginator="true" paginatorAlwaysVisible="false"
+					paginatorPosition="bottom">
 
-				<p:column headerText="Número"
-					style="text-align: center; width: 100px">
-					<h:outputText value="#{pedido.id}" />
+					<p:column headerText="Número" style="text-align: center">
+						<h:outputText value="#{pedido.id}" />
 
-					<p:commandButton update=":form:pedidoDetail"
-						style="margin-left:3px" oncomplete="PF('pedidoDialog').show()"
-						icon="ui-icon-search" title="Visualizar o Pedido">
-						<f:setPropertyActionListener value="#{pedido}"
-							target="#{pesquisaPedidosBean.pedidoSelecionado}" />
-					</p:commandButton>
-				</p:column>
+						<p:commandButton update=":form:pedidoDetail"
+							style="margin-left:3px" oncomplete="PF('pedidoDialog').show()"
+							icon="ui-icon-search" title="Visualizar o Pedido">
+							<f:setPropertyActionListener value="#{pedido}"
+								target="#{pesquisaPedidosBean.pedidoSelecionado}" />
+						</p:commandButton>
+					</p:column>
 
-				<p:column headerText="Cliente">
-					<h:outputText value="#{pedido.cliente.nome}" />
-				</p:column>
-				<p:column headerText="Vendedor">
-					<h:outputText value="#{pedido.vendedor.nome}" />
-				</p:column>
-				<p:column headerText="Data de criação"
-					style="text-align: center; width: 140px">
-					<h:outputText value="#{pedido.dataCriacao}">
-						<f:convertDateTime pattern="dd/MM/yyyy" />
-					</h:outputText>
-				</p:column>
-				<p:column headerText="Valor total"
-					style="text-align: right; width: 120px">
-					<h:outputText value="#{pedido.valorTotal}">
-						<f:convertNumber type="currency" />
-					</h:outputText>
-				</p:column>
-
-
-				<p:column headerText="Status" style="width: 100px">
-					<h:outputText value="#{pedido.status}" />
-				</p:column>
-
-				<p:column headerText="-">
-					<h:outputText
-						value="#{pesquisaPedidosBean.vefiricaPedidoQuitado(pedido)  ? 'QUITADO' : 'PENDENTE'}"
-						rendered="#{pedido.status=='EMITIDO'}" />
-				</p:column>
-
-				<p:column style="text-align: center; width: 50px">
-					<p:button icon="ui-icon-pencil" title="Editar"
-						outcome="/pedidos/CadastroPedido">
-						<f:param name="pedido" value="#{pedido.id}" />
-					</p:button>
+					<p:column headerText="Cliente">
+						<h:outputText value="#{pedido.cliente.nome}" />
+					</p:column>
+					<p:column headerText="Vendedor">
+						<h:outputText value="#{pedido.vendedor.nome}" />
+					</p:column>
+					<p:column headerText="Data de criação">
+						<h:outputText value="#{pedido.dataCriacao}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Valor total">
+						<h:outputText value="#{pedido.valorTotal}">
+							<f:convertNumber type="currency" />
+						</h:outputText>
+					</p:column>
 
 
-				</p:column>
-			</p:dataTable>
+					<p:column headerText="Status">
+						<h:outputText value="#{pedido.status}" />
+					</p:column>
 
-			<p:dialog header="Pedido Info" widgetVar="pedidoDialog" modal="true"
-				showEffect="fade" hideEffect="fade" resizable="false">
-				<p:outputPanel id="pedidoDetail" style="text-align:center;">
-					<p:panelGrid columns="2" columnClasses="label,value">
-
-						<h:outputText value="Numero Pedido" />
-						<h:outputText value="#{pesquisaPedidosBean.pedidoSelecionado.id}" />
-
-						<h:outputText value="Cliente" />
+					<p:column headerText="-">
 						<h:outputText
-							value="#{pesquisaPedidosBean.pedidoSelecionado.cliente.nome}" />
+							value="#{pesquisaPedidosBean.vefiricaPedidoQuitado(pedido)  ? 'QUITADO' : 'PENDENTE'}"
+							rendered="#{pedido.status=='EMITIDO'}" />
+					</p:column>
 
-						<h:outputText value="Forma de Pagamento" />
-						<h:outputText
-							value="#{pesquisaPedidosBean.pedidoSelecionado.formaPagamento.descricao}" />
-
-						<h:outputText value="Data da Emissao" />
-						<h:outputText
-							value="#{pesquisaPedidosBean.pedidoSelecionado.dataEmissao}" />
-
-						<h:outputText value="Valor Total" />
-						<h:outputText
-							value="#{pesquisaPedidosBean.pedidoSelecionado.valorTotal}" />
-
-					</p:panelGrid>
-				</p:outputPanel>
-			</p:dialog>
+					<p:column style="text-align: center; width: 50px">
+						<p:button icon="ui-icon-pencil" title="Editar"
+							outcome="/pedidos/CadastroPedido">
+							<f:param name="pedido" value="#{pedido.id}" />
+						</p:button>
 
 
+					</p:column>
+				</p:dataTable>
+
+				<p:dialog header="Pedido Info" widgetVar="pedidoDialog" modal="true"
+					showEffect="fade" hideEffect="fade" resizable="false">
+					<p:outputPanel id="pedidoDetail" style="text-align:center;">
+						<p:panelGrid columns="2">
+
+							<h:outputText value="Numero Pedido" />
+							<h:outputText value="#{pesquisaPedidosBean.pedidoSelecionado.id}" />
+
+							<h:outputText value="Cliente" />
+							<h:outputText
+								value="#{pesquisaPedidosBean.pedidoSelecionado.cliente.nome}" />
+
+							<h:outputText value="Forma de Pagamento" />
+							<h:outputText
+								value="#{pesquisaPedidosBean.pedidoSelecionado.formaPagamento.descricao}" />
+
+							<h:outputText value="Data da Emissao" />
+							<h:outputText
+								value="#{pesquisaPedidosBean.pedidoSelecionado.dataEmissao}" />
+
+							<h:outputText value="Valor Total" />
+							<h:outputText
+								value="#{pesquisaPedidosBean.pedidoSelecionado.valorTotal}" />
+
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:dialog>
 
 
+
+			</div>
 
 		</h:form>
 	</ui:define>

@@ -25,54 +25,55 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
+			<div class="ui-fluid">
+				<p:panelGrid columns="2" id="painel"
+					style="width: 100%; margin-top: 20px">
 
-			<p:panelGrid columns="2" id="painel"
-				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+					<p:outputLabel value="Cpf" />
+					<p:inputMask mask="999.999.999-99" size="40"
+						value="#{pesquisaClienteBean.clienteParaPesquisa.cpf}" />
 
-				<p:outputLabel value="Cpf" />
-				<p:inputMask mask="999.999.999-99" size="40"
-					value="#{pesquisaClienteBean.clienteParaPesquisa.cpf}" />
+					<p:outputLabel value="nome" />
+					<p:inputText size="40" styleClass="up"
+						value="#{pesquisaClienteBean.clienteParaPesquisa.nome}" />
 
-				<p:outputLabel value="nome" />
-				<p:inputText size="40" styleClass="up"
-					value="#{pesquisaClienteBean.clienteParaPesquisa.nome}" />
+				</p:panelGrid>
 
-			</p:panelGrid>
+				<p:dataTable id="tabelaCliente" reflow="true"
+					value="#{pesquisaClienteBean.listaCliente}" var="cliente"
+					style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
+					rows="20" paginator="true" paginatorAlwaysVisible="false"
+					paginatorPosition="bottom">
 
-			<p:dataTable id="tabelaCliente"
-				value="#{pesquisaClienteBean.listaCliente}" var="cliente"
-				style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
-				rows="20" paginator="true" paginatorAlwaysVisible="false"
-				paginatorPosition="bottom">
+					<p:column headerText="Cliente">
+						<h:outputText value="#{cliente.nome.toUpperCase()}" />
+					</p:column>
+					<p:column headerText="E-mail">
+						<h:outputText value="#{cliente.email.toUpperCase()}" />
+					</p:column>
+					<p:column headerText="Data de Nascimento">
+						<h:outputText value="#{cliente.dataNascimento}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
 
-				<p:column headerText="Cliente">
-					<h:outputText value="#{cliente.nome.toUpperCase()}" />
-				</p:column>
-				<p:column headerText="E-mail">
-					<h:outputText value="#{cliente.email.toUpperCase()}" />
-				</p:column>
-				<p:column headerText="Data de Nascimento"
-					style="text-align: center; width: 140px">
-					<h:outputText value="#{cliente.dataNascimento}">
-						<f:convertDateTime pattern="dd/MM/yyyy" />
-					</h:outputText>
-				</p:column>
+					<p:column headerText="Valor Pendente" styleClass="negrito" 
+						style="text-align: right; width: 90px">
+						<h:outputText
+							style="color: #{pesquisaClienteBean.verificaPendenciaParcela(cliente) ?  'red' : ''}"
+							value="#{pesquisaClienteBean.porValorPendente(cliente)}">
+							<f:convertNumber type="currency" />
+						</h:outputText>
+					</p:column>
 
-				<p:column headerText="Valor Pendente"
-				style="text-align: right; width: 120px">
-					<h:outputText style="color: #{pesquisaClienteBean.verificaPendenciaParcela(cliente) ?  'red' : ''}" 
-						value="#{pesquisaClienteBean.porValorPendente(cliente)}">
-						<f:convertNumber type="currency" />
-					</h:outputText>
-				</p:column>
-
-				<p:column style="text-align: center; width: 50px">
-					<p:button icon="ui-icon-pencil" title="Editar"
-						outcome="/clientes/CadastroCliente">
-						<f:param name="cliente" value="#{cliente.id}" />
-					</p:button>
-				</p:column>
-			</p:dataTable>
+					<p:column style="text-align: center; width: 50px">
+						<p:button icon="ui-icon-pencil" title="Editar"
+							outcome="/clientes/CadastroCliente">
+							<f:param name="cliente" value="#{cliente.id}" />
+						</p:button>
+					</p:column>
+				</p:dataTable>
+			</div>
 
 		</h:form>
 

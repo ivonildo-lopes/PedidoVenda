@@ -1,0 +1,32 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Codigo de Barra </ui:define>
+
+	<ui:define name="corpo">
+		<h:form>
+		
+		<h1>Codigo de Barra</h1>
+		<p:messages autoUpdate="true" closable="true"/>
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Emitir" id="emitir"
+						action="#{relatorioEmitirCodigoBarras.emitir()}" ajax="false"  />
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+			<p:panelGrid columns="2" style="margin-top:20px" columnClasses="rotulo, campo">
+			
+				<p:outputLabel value="SKU" for="sku"/>
+				
+				<p:inputMask mask="aa9999" id="sku" value="#{relatorioEmitirCodigoBarras.sku}"/>
+			
+			</p:panelGrid>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -10,18 +10,15 @@
 	<ui:define name="corpo">
 
 		<h:form>
-
 			
 			<div class="container">
 				<h1>Aniversariantes do dia</h1>
 				<table class="table table-striped">
-
 					<thead>
 						<tr>
 							<th>NOME</th>
 							<th>DATA</th>
 						</tr>
-
 					</thead>
 
 					<ui:repeat var="cli" value="#{homeBean.listaClientes}"
@@ -30,7 +27,6 @@
 							<tr>
 								<td>#{cli.nome}</td>
 								<td>#{cli.dataNascimento}</td>
-
 							</tr>
 						</tbody>
 					</ui:repeat>

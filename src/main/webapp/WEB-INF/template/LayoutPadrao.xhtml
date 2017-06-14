@@ -8,12 +8,14 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title><ui:insert name="titulo">Sistema de Pedidos de Venda</ui:insert></title>
 	<h:outputStylesheet library="css" name="sistema.css" />
 	<h:outputStylesheet library="css" name="bootstrap.css" />
 	<h:outputScript library="js" name="jquery.maskMoney.js" />
 	<h:outputScript library="js" name="bootstrap.js" />
-	
+
 
 	<script>
 		PrimeFaces.locales['pt'] = {
@@ -84,67 +86,96 @@
 	</p:ajaxStatus>
 
 	<header>
-	<div style="float: left">
-		<h:link outcome="/Home">
-			<h:graphicImage library="images" name="logoloja.png" />
-		</h:link>
-	</div>
 
-	<div style="float: right; margin-right: 110px">
-		<span
-			style="float: left; height: 30px; line-height: 30px; margin-right: 60px">
-			Olá usuário! </span>
+	<div class="ui-fluid">
 
-		<h:form style="display: inline-block">
-			<p:menubar styleClass="menu-sistema">
-				<p:submenu label="Cadastros">
-					<p:menuitem value="Clientes" outcome="/clientes/CadastroCliente" />
-					<p:menuitem value="Usuários" outcome="/usuarios/CadastroUsuario" />
-					<p:separator />
-					<p:menuitem value="Categorias"
-						outcome="/categorias/cadastroCategoria" />
-					<p:menuitem value="Produtos" outcome="/produtos/CadastroProduto" />
-				</p:submenu>
+		<h:form>
 
-				<p:submenu label="Consultas">
-					<p:menuitem value="Clientes" outcome="/clientes/PesquisaClientes" />
-					<p:menuitem value="Usuários" outcome="/usuarios/PesquisaUsuario" />
-					<p:separator />
-					<p:menuitem value="Categorias"
-						outcome="/categorias/pesquisaCategorias" />
-					<p:menuitem value="Produtos" outcome="/produtos/PesquisaProdutos" />
-				</p:submenu>
+			<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+						aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/sistemavenda/Home.xhtml">Sistema de vendas</a>
+				</div>
+				<div id="navbar" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li style="margin-top:10px"><p:menubar styleClass="menu-sistema">
+								<p:submenu label="Cadastros">
+									<p:menuitem value="Clientes"
+										outcome="/clientes/CadastroCliente" />
+									<p:menuitem value="Usuários"
+										outcome="/usuarios/CadastroUsuario" />
+									<p:separator />
+									<p:menuitem value="Categorias"
+										outcome="/categorias/cadastroCategoria" />
+									<p:menuitem value="Produtos"
+										outcome="/produtos/CadastroProduto" />
+								</p:submenu>
+							</p:menubar></li>
 
-				<p:submenu label="Pedidos">
-					<p:menuitem value="Novo pedido" outcome="/pedidos/CadastroPedido" />
-					<p:menuitem value="Pesquisa" outcome="/pedidos/PesquisaPedidos" />
-				</p:submenu>
-				<p:submenu label="Relatórios">
-					<p:menuitem value="Pedidos Emitidos"
-						outcome="/relatorios/RelatorioPedidosEmitidos" />
-					<p:menuitem value="Produtos no Estoque"
-						outcome="/relatorios/RelatorioProdutosEstoque" />
-				</p:submenu>
-				<p:submenu label="Sobre">
-					<p:menuitem value="Sobre o sistema" outcome="/sobre" />
-				</p:submenu>
+						<li style="margin-top:10px"><p:menubar styleClass="menu-sistema">
+								<p:submenu label="Consultas">
+									<p:menuitem value="Clientes"
+										outcome="/clientes/PesquisaClientes" />
+									<p:menuitem value="Usuários"
+										outcome="/usuarios/PesquisaUsuario" />
+									<p:separator />
+									<p:menuitem value="Categorias"
+										outcome="/categorias/pesquisaCategorias" />
+									<p:menuitem value="Produtos"
+										outcome="/produtos/PesquisaProdutos" />
+								</p:submenu>
+							</p:menubar></li>
 
-				<p:menuitem value="Sair" />
-			</p:menubar>
+						<li style="margin-top:10px"><p:menubar styleClass="menu-sistema">
+								<p:submenu label="Pedidos">
+									<p:menuitem value="Novo pedido"
+										outcome="/pedidos/CadastroPedido" />
+									<p:menuitem value="Pesquisa" outcome="/pedidos/PesquisaPedidos" />
+								</p:submenu>
+							</p:menubar></li>
+
+						<li style="margin-top:10px"><p:menubar styleClass="menu-sistema">
+								<p:submenu label="Relatórios">
+									<p:menuitem value="Pedidos Emitidos"
+										outcome="/relatorios/RelatorioPedidosEmitidos" />
+									<p:menuitem value="Produtos no Estoque"
+										outcome="/relatorios/RelatorioProdutosEstoque" />
+									<p:menuitem value="Emitir Codigo de Barra"
+										outcome="/relatorios/emissaoCodigoBarra" />	
+								</p:submenu>
+							</p:menubar></li>
+						
+						<li style="margin-top:10px"><p:menubar styleClass="menu-sistema">
+								<p:submenu label="Sobre">
+									<p:menuitem value="Sobre o sistema" outcome="/sobre" />
+								</p:submenu>
+							</p:menubar></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+			</nav>
+
 		</h:form>
 	</div>
 	<div style="clear: both"></div>
 	</header>
 
-	<div id="conteudo">
+	<div id="conteudo" class="container">
 		<ui:insert name="corpo" />
 	</div>
 
 	<p:separator style="margin-top: 20px" />
 
 	<footer> Sistema Desenvolvido por <b>Ivonildo Lopes
-		Rodrigues </b>
-	</footer>
+		Rodrigues </b> </footer>
 
 	<script>
 		function configurarMoeda() {

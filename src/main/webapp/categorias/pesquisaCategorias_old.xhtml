@@ -25,9 +25,9 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<div class="ui-fluid">
+
 			<p:panelGrid columns="2" id="painel"
-				style="width: 100%; margin-top: 20px">
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
 
 				<p:outputLabel value="Descricao" />
 				<p:inputText size="40" styleClass="up"
@@ -35,30 +35,29 @@
 
 			</p:panelGrid>
 
-			
-				<p:dataTable id="tabelaCliente" reflow="true"
-					value="#{pesquisaCategoriaBean.listaCategoria}" var="categoria"
-					style="margin-top: 20px"
-					emptyMessage="Nenhuma categoria encontrada." rows="20"
-					paginator="true" paginatorAlwaysVisible="false"
-					paginatorPosition="bottom">
+			<p:dataTable id="tabelaCliente"
+				value="#{pesquisaCategoriaBean.listaCategoria}" var="categoria"
+				style="margin-top: 20px"
+				emptyMessage="Nenhuma categoria encontrada." rows="20"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
 
-					<p:column headerText="Sub-Categoria">
-						<h:outputText value="#{categoria.descricao}" />
-					</p:column>
+				<p:column headerText="Sub-Categoria">
+					<h:outputText value="#{categoria.descricao}" />
+				</p:column>
 
-					<p:column headerText="Categoria">
-						<h:outputText value="#{categoria.categoriaPai.descricao}" />
-					</p:column>
+				<p:column headerText="Categoria">
+					<h:outputText value="#{categoria.categoriaPai.descricao}" />
+				</p:column>
 
-					<p:column style="text-align: center; width: 50px">
-						<p:button icon="ui-icon-pencil" title="Editar"
-							outcome="/categorias/cadastroCategoria">
-							<f:param name="categoria" value="#{categoria.id}" />
-						</p:button>
-					</p:column>
-				</p:dataTable>
-			</div>
+				<p:column style="text-align: center; width: 50px">
+					<p:button icon="ui-icon-pencil" title="Editar"
+						outcome="/categorias/cadastroCategoria">
+						<f:param name="categoria" value="#{categoria.id}" />
+					</p:button>
+				</p:column>
+			</p:dataTable>
+
 		</h:form>
 
 	</ui:define>

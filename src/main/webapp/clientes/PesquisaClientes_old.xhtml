@@ -1,0 +1,80 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa Paciente</ui:define>
+
+	<ui:define name="corpo">
+
+		<h:form>
+			<p:messages autoUpdate="true" closable="true" />
+
+			<h1>Pesquisa de Clientes</h1>
+
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisa"
+						action="#{pesquisaClienteBean.pesquisar()}" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/clientes/CadastroCliente" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="Cpf" />
+				<p:inputMask mask="999.999.999-99" size="40"
+					value="#{pesquisaClienteBean.clienteParaPesquisa.cpf}" />
+
+				<p:outputLabel value="nome" />
+				<p:inputText size="40" styleClass="up"
+					value="#{pesquisaClienteBean.clienteParaPesquisa.nome}" />
+
+			</p:panelGrid>
+
+			<p:dataTable id="tabelaCliente"
+				value="#{pesquisaClienteBean.listaCliente}" var="cliente"
+				style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
+				rows="20" paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+
+				<p:column headerText="Cliente">
+					<h:outputText value="#{cliente.nome.toUpperCase()}" />
+				</p:column>
+				<p:column headerText="E-mail">
+					<h:outputText value="#{cliente.email.toUpperCase()}" />
+				</p:column>
+				<p:column headerText="Data de Nascimento"
+					style="text-align: center; width: 140px">
+					<h:outputText value="#{cliente.dataNascimento}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Valor Pendente"
+				style="text-align: right; width: 120px">
+					<h:outputText style="color: #{pesquisaClienteBean.verificaPendenciaParcela(cliente) ?  'red' : ''}" 
+						value="#{pesquisaClienteBean.porValorPendente(cliente)}">
+						<f:convertNumber type="currency" />
+					</h:outputText>
+				</p:column>
+
+				<p:column style="text-align: center; width: 50px">
+					<p:button icon="ui-icon-pencil" title="Editar"
+						outcome="/clientes/CadastroCliente">
+						<f:param name="cliente" value="#{cliente.id}" />
+					</p:button>
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

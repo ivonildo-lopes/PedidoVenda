@@ -43,6 +43,7 @@ h1 {
 	
 }
 
+
 #login-dialog {
 	width: 290px;
 	margin: auto;
@@ -111,13 +112,17 @@ h1 {
     background: none !important;
 }
 
+/* fonte menu */
 .menu-sistema .ui-menu-parent > a .ui-menuitem-text, .menu-sistema > .ui-menu-list > .ui-menuitem > a > .ui-menuitem-text {
     color: #ffffff !important;
 }
 
+/*seta para baixo
 .menu-sistema .ui-icon-triangle-1-s {
     background: url(#{resource['images:seta-para-baixo.png']}) no-repeat;
 }
+*/
+
 /* Menu sistema fim */
 
 .ui-toolbar ui-widget ui-widget-header ui-corner-all ui-helper-clearfix{

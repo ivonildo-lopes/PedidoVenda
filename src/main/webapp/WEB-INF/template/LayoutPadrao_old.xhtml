@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<title><ui:insert name="titulo">Sistema de Pedidos de Venda</ui:insert></title>
+	<h:outputStylesheet library="css" name="sistema.css" />
+<!-- 	<h:outputStylesheet library="css" name="bootstrap.css" /> -->
+	<h:outputScript library="js" name="jquery.maskMoney.js" />
+<!-- 	<h:outputScript library="js" name="bootstrap.js" /> -->
+	
+
+	<script>
+		PrimeFaces.locales['pt'] = {
+			closeText : 'Fechar',
+			prevText : 'Anterior',
+			nextText : 'Próximo',
+			currentText : 'Começo',
+			monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
+					'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+					'Novembro', 'Dezembro' ],
+			monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+					'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+			dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+					'Sexta', 'Sábado' ],
+			dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
+			dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+			weekHeader : 'Semana',
+			firstDay : 0,
+			isRTL : false,
+			showMonthAfterYear : false,
+			yearSuffix : '',
+			timeOnlyTitle : 'Só Horas',
+			timeText : 'Tempo',
+			hourText : 'Hora',
+			minuteText : 'Minuto',
+			secondText : 'Segundo',
+			ampm : false,
+			month : 'Mês',
+			week : 'Semana',
+			day : 'Dia',
+			allDayText : 'Todo o Dia'
+		};
+		jQuery(document).ready(function(jQuery) {
+			// Chamada da funcao upperText(); ao carregar a pagina
+			upperText();
+		});
+		// Funcao que faz o texto ficar em uppercase
+		function upperText() {
+			// Para tratar o colar
+			jQuery(".up").bind('paste', function(e) {
+				var el = jQuery(this);
+				setTimeout(function() {
+					var text = jQuery(el).val();
+					el.val(text.toUpperCase());
+				}, 100);
+			});
+			// Para tratar quando é digitado
+			jQuery(".up").keypress(function() {
+				var el = jQuery(this);
+				setTimeout(function() {
+					var text = jQuery(el).val();
+					el.val(text.toUpperCase());
+				}, 100);
+			});
+		}
+	</script>
+
+</h:head>
+
+<h:body>
+	<p:ajaxStatus styleClass="ajax-status" onsuccess="configurarMoeda()">
+		<f:facet name="start">
+			<h:graphicImage library="images" name="loading.gif" />
+		</f:facet>
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+
+	<header>
+	<div style="float: left">
+		<h:link outcome="/Home">
+			<h:graphicImage library="images" name="logoloja.png" />
+		</h:link>
+	</div>
+
+	<div style="float: right; margin-right: 110px">
+		<span
+			style="float: left; height: 30px; line-height: 30px; margin-right: 60px">
+			Olá usuário! </span>
+
+		<h:form style="display: inline-block">
+			<p:menubar styleClass="menu-sistema">
+				<p:submenu label="Cadastros">
+					<p:menuitem value="Clientes" outcome="/clientes/CadastroCliente" />
+					<p:menuitem value="Usuários" outcome="/usuarios/CadastroUsuario" />
+					<p:separator />
+					<p:menuitem value="Categorias"
+						outcome="/categorias/cadastroCategoria" />
+					<p:menuitem value="Produtos" outcome="/produtos/CadastroProduto" />
+				</p:submenu>
+
+				<p:submenu label="Consultas">
+					<p:menuitem value="Clientes" outcome="/clientes/PesquisaClientes" />
+					<p:menuitem value="Usuários" outcome="/usuarios/PesquisaUsuario" />
+					<p:separator />
+					<p:menuitem value="Categorias"
+						outcome="/categorias/pesquisaCategorias" />
+					<p:menuitem value="Produtos" outcome="/produtos/PesquisaProdutos" />
+				</p:submenu>
+
+				<p:submenu label="Pedidos">
+					<p:menuitem value="Novo pedido" outcome="/pedidos/CadastroPedido" />
+					<p:menuitem value="Pesquisa" outcome="/pedidos/PesquisaPedidos" />
+				</p:submenu>
+				<p:submenu label="Relatórios">
+					<p:menuitem value="Pedidos Emitidos"
+						outcome="/relatorios/RelatorioPedidosEmitidos" />
+					<p:menuitem value="Produtos no Estoque"
+						outcome="/relatorios/RelatorioProdutosEstoque" />
+				</p:submenu>
+				<p:submenu label="Sobre">
+					<p:menuitem value="Sobre o sistema" outcome="/sobre" />
+				</p:submenu>
+
+				<p:menuitem value="Sair" />
+			</p:menubar>
+		</h:form>
+	</div>
+	<div style="clear: both"></div>
+	</header>
+
+	<div id="conteudo">
+		<ui:insert name="corpo" />
+	</div>
+
+	<p:separator style="margin-top: 20px" />
+
+	<footer> Sistema Desenvolvido por <b>Ivonildo Lopes
+		Rodrigues </b>
+	</footer>
+
+	<script>
+		function configurarMoeda() {
+			$(".moeda").maskMoney({
+				decimal : ",",
+				thousands : ".",
+				allowZero : true
+			});
+		}
+
+		$(document).ready(function() {
+			configurarMoeda();
+		});
+	</script>
+</h:body>
+
+</html>

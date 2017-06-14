@@ -13,7 +13,7 @@
 				converter="clienteConverter" />
 		</f:metadata>
 
-		<h1 style="margin-top:30px">#{cadastroClienteBean.verificaEdicao() ? 'Edição de Cliente'
+		<h1>#{cadastroClienteBean.verificaEdicao() ? 'Edição de Cliente'
 			: 'Novo Cliente'}</h1>
 
 		<h:form>
@@ -30,19 +30,18 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<div class="ui-fluid">
-			<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
-				layout="grid" styleClass="ui-panelgrid-blank">
+			<p:panelGrid columns="2" columnClasses="rotulo, campo"
+				style="width: 100%; margin-top: 20px">
 
 				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" styleClass="up"
-					value="#{cadastroClienteBean.cliente.nome}"
-					placeholder="Informe o nome do Cliente" />
+				<p:inputText id="nome" size="90" styleClass="up"
+					value="#{cadastroClienteBean.cliente.nome}" 
+					placeholder="Informe o nome do Cliente"/>
 
 				<p:outputLabel value="Email" for="email" />
-				<p:inputText id="email" styleClass="up"
-					value="#{cadastroClienteBean.cliente.email}"
-					placeholder="Informe o email do Cliente" />
+				<p:inputText id="email" size="90" styleClass="up"
+					value="#{cadastroClienteBean.cliente.email}" 
+					placeholder="Informe o email do Cliente"/>
 
 				<p:outputLabel value="CPF" for="cpf" />
 				<p:inputMask id="cpf" size="40" mask="999.999.999-99"
@@ -58,14 +57,14 @@
 
 
 				<p:outputLabel value="Tipo" for="tipo" />
-				<p:selectOneMenu id="tipo"
+				<p:selectOneMenu id="tipo" 
 					value="#{cadastroClienteBean.cliente.tipo}">
 					<f:selectItem itemLabel="Selecione" />
 					<f:selectItems value="#{cadastroClienteBean.tipoPessoaFisica}" />
 				</p:selectOneMenu>
 
 			</p:panelGrid>
-			</div>
+
 
 		</h:form>
 

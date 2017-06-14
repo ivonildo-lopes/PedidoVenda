@@ -25,42 +25,38 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
+			<div class="ui-fluid">
+				<p:panelGrid columns="2" id="painel"
+					style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
 
-			<p:panelGrid columns="2" id="painel"
-				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+					<p:outputLabel value="nome" />
+					<p:inputText size="40" styleClass="up"
+						value="#{pesquisaUsuarioBean.usuarioParaPesquisa.nome}" />
 
-				<p:outputLabel value="nome" />
-				<p:inputText size="40" styleClass="up"
-					value="#{pesquisaUsuarioBean.usuarioParaPesquisa.nome}" />
+				</p:panelGrid>
 
-			</p:panelGrid>
+				<p:dataTable id="tabelaUsuario" reflow="true"
+					value="#{pesquisaUsuarioBean.listaUsuario}" var="usuario"
+					style="margin-top: 20px" emptyMessage="Nenhum Usuario encontrado."
+					rows="20" paginator="true" paginatorAlwaysVisible="false"
+					paginatorPosition="bottom">
 
-			<p:dataTable id="tabelaUsuario"
-				value="#{pesquisaUsuarioBean.listaUsuario}" var="usuario"
-				style="margin-top: 20px" emptyMessage="Nenhum Usuario encontrado."
-				rows="20" paginator="true" paginatorAlwaysVisible="false"
-				paginatorPosition="bottom">
+					<p:column headerText="Usuario">
+						<h:outputText value="#{usuario.nome.toUpperCase()}" />
+					</p:column>
+					<p:column headerText="E-mail">
+						<h:outputText value="#{usuario.email.toUpperCase()}" />
+					</p:column>
 
-				<p:column headerText="Usuario">
-					<h:outputText value="#{usuario.nome.toUpperCase()}" />
-				</p:column>
-				<p:column headerText="E-mail">
-					<h:outputText value="#{usuario.email.toUpperCase()}" />
-				</p:column>
+					<p:column style="text-align: center; width: 50px">
+						<p:button icon="ui-icon-pencil" title="Editar"
+							outcome="/usuarios/CadastroUsuario">
+							<f:param name="usuario" value="#{usuario.id}" />
+						</p:button>
+					</p:column>
+				</p:dataTable>
 
-				<p:column style="text-align: center; width: 50px">
-					<p:button icon="ui-icon-pencil" title="Editar"
-						outcome="/usuarios/CadastroUsuario">
-						<f:param name="usuario" value="#{usuario.id}" />
-					</p:button>
-				</p:column>
-			</p:dataTable>
-
-
-
-
-
-
+			</div>
 		</h:form>
 
 
