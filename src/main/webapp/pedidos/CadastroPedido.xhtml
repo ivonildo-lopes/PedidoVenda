@@ -25,7 +25,7 @@
 
 			<ui:include src="/WEB-INF/template/pedidos/CapaPedido.xhtml" />
 
-				<p:tabView style="margin-top: 20px">
+				<p:tabView style="margin-top: 20px;width:100%">
 					<p:tab title="Itens">
 						<ui:include src="/WEB-INF/template/pedidos/ItensPedido.xhtml" />
 					</p:tab>
@@ -40,7 +40,6 @@
 
 			<p:growl id="mss" />
 
-			<div class="ui-fluid">
 			<p:dataTable id="tabela" value="#{cadastroPedidoBean.parcelas}"
 				var="parcela" style="margin-top: 20px;font-size:10px"
 				emptyMessage="Esse pedido não foi parcelado." rows="5"
@@ -80,7 +79,6 @@
 				</p:column>
 
 			</p:dataTable>
-			</div>
 
 		</h:form>
 	</ui:define>

@@ -107,54 +107,56 @@
 					<ul class="nav navbar-nav">
 						<li style="margin-top:10px"><p:menubar styleClass="menu-sistema">
 								<p:submenu label="Cadastros">
-									<p:menuitem value="Clientes"
+									<p:menuitem value="Clientes" style="margin-top:10px"
 										outcome="/clientes/CadastroCliente" />
-									<p:menuitem value="Usuários"
+									<p:menuitem value="Usuários" style="margin-top:10px"
 										outcome="/usuarios/CadastroUsuario" />
 									<p:separator />
-									<p:menuitem value="Categorias"
+									<p:menuitem value="Categorias" style="margin-top:10px"
 										outcome="/categorias/cadastroCategoria" />
-									<p:menuitem value="Produtos"
+									<p:menuitem value="Produtos" style="margin-top:10px"
 										outcome="/produtos/CadastroProduto" />
 								</p:submenu>
 							</p:menubar></li>
 
 						<li style="margin-top:10px"><p:menubar styleClass="menu-sistema">
 								<p:submenu label="Consultas">
-									<p:menuitem value="Clientes"
+									<p:menuitem value="Clientes" style="margin-top:10px"
 										outcome="/clientes/PesquisaClientes" />
-									<p:menuitem value="Usuários"
+									<p:menuitem value="Usuários" style="margin-top:10px"
 										outcome="/usuarios/PesquisaUsuario" />
 									<p:separator />
-									<p:menuitem value="Categorias"
+									<p:menuitem value="Categorias" style="margin-top:10px"
 										outcome="/categorias/pesquisaCategorias" />
-									<p:menuitem value="Produtos"
+									<p:menuitem value="Produtos" style="margin-top:10px"
 										outcome="/produtos/PesquisaProdutos" />
 								</p:submenu>
 							</p:menubar></li>
 
 						<li style="margin-top:10px"><p:menubar styleClass="menu-sistema">
 								<p:submenu label="Pedidos">
-									<p:menuitem value="Novo pedido"
+									<p:menuitem value="Novo pedido" style="margin-top:10px"
 										outcome="/pedidos/CadastroPedido" />
-									<p:menuitem value="Pesquisa" outcome="/pedidos/PesquisaPedidos" />
+									<p:menuitem value="Pesquisa" style="margin-top:10px" 
+									outcome="/pedidos/PesquisaPedidos" />
 								</p:submenu>
 							</p:menubar></li>
 
 						<li style="margin-top:10px"><p:menubar styleClass="menu-sistema">
 								<p:submenu label="Relatórios">
-									<p:menuitem value="Pedidos Emitidos"
+									<p:menuitem value="Pedidos Emitidos" style="margin-top:10px"
 										outcome="/relatorios/RelatorioPedidosEmitidos" />
-									<p:menuitem value="Produtos no Estoque"
+									<p:menuitem value="Produtos no Estoque" style="margin-top:10px"
 										outcome="/relatorios/RelatorioProdutosEstoque" />
-									<p:menuitem value="Emitir Codigo de Barra"
+									<p:menuitem value="Emitir Codigo de Barra" style="margin-top:10px"
 										outcome="/relatorios/emissaoCodigoBarra" />	
 								</p:submenu>
 							</p:menubar></li>
 						
 						<li style="margin-top:10px"><p:menubar styleClass="menu-sistema">
 								<p:submenu label="Sobre">
-									<p:menuitem value="Sobre o sistema" outcome="/sobre" />
+									<p:menuitem value="Sobre o sistema" style="margin-top:10px" 
+									outcome="/sobre" />
 								</p:submenu>
 							</p:menubar></li>
 					</ul>
@@ -168,7 +170,7 @@
 	<div style="clear: both"></div>
 	</header>
 
-	<div id="conteudo" class="container">
+	<div id="conteudo">
 		<ui:insert name="corpo" />
 	</div>
 
