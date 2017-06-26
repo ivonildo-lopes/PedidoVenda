@@ -16,7 +16,6 @@
 	<h:outputScript library="js" name="jquery.maskMoney.js" />
 	<h:outputScript library="js" name="bootstrap.js" />
 
-
 	<script>
 		PrimeFaces.locales['pt'] = {
 			closeText : 'Fechar',
@@ -116,6 +115,8 @@
 										outcome="/categorias/cadastroCategoria" />
 									<p:menuitem value="Produtos" style="margin-top:10px"
 										outcome="/produtos/CadastroProduto" />
+									<p:menuitem value="Fornecedores" style="margin-top:10px"
+										outcome="/fornecedores/CadastroFornecedor" />	
 								</p:submenu>
 							</p:menubar></li>
 
@@ -130,6 +131,8 @@
 										outcome="/categorias/pesquisaCategorias" />
 									<p:menuitem value="Produtos" style="margin-top:10px"
 										outcome="/produtos/PesquisaProdutos" />
+									<p:menuitem value="Fornecedores" style="margin-top:10px"
+										outcome="/fornecedores/PesquisaFornecedor" />	
 								</p:submenu>
 							</p:menubar></li>
 

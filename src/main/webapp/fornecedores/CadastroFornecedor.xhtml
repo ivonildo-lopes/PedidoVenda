@@ -1,0 +1,109 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">#{cadastroFornecedorBean.verificaEdicao() ? 'Edição de Paciente' : 'Novo Paciente'}</ui:define>
+
+	<ui:define name="corpo">
+		<f:metadata>
+			<o:viewParam name="fornecedor"
+				value="#{cadastroFornecedorBean.fornecedor}"
+				converter="fornecedorConverter" />
+		</f:metadata>
+
+		<h1 style="margin-top: 30px">#{cadastroFornecedorBean.verificaEdicao()
+			? 'Edição de Fornecedor' : 'Novo Fornecedor'}</h1>
+
+		<h:form>
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/fornecedores/CadastroFornecedor" />
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						action="#{cadastroFornecedorBean.salvar()}" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa"
+						outcome="/fornecedores/PesquisaFornecedor" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<div class="ui-fluid">
+				<p:panelGrid columns="2"
+					columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
+					styleClass="ui-panelgrid-blank">
+
+					<p:outputLabel value="Nome" for="nome" />
+					<p:inputText id="nome" styleClass="up"
+						value="#{cadastroFornecedorBean.fornecedor.nome}"
+						placeholder="Informe o nome do Fornecedor" />
+
+					<p:outputLabel value="Apelido" for="apelido" />
+					<p:inputText id="apelido" styleClass="up"
+						value="#{cadastroFornecedorBean.fornecedor.apelido}"
+						placeholder="Informe o nome do Fornecedor" />
+
+					<p:outputLabel value="Tipo" for="tipo" />
+					<p:selectOneMenu id="tipo"
+						value="#{cadastroFornecedorBean.fornecedor.tipo}">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems value="#{cadastroFornecedorBean.tipoPessoaFisica}" />
+						<p:ajax listener="#{cadastroFornecedorBean.formataMascara()}"
+							update="cpf lblTipo scriptMask" />
+					</p:selectOneMenu>
+
+					<p:outputLabel id="lblTipo" value="#{cadastroFornecedorBean.fornecedor.tipo == 'FISICA' ? 'CPF' : cadastroFornecedorBean.fornecedor.tipo == 'JURIDICA' ? 'CNPJ' : ''}" for="cpf" />
+					<p:inputText id="cpf" size="40"
+						styleClass="#{cadastroFornecedorBean.fornecedor.tipo == 'FISICA' ? 'cpf' : cadastroFornecedorBean.fornecedor.tipo == 'JURIDICA' ? 'cnpj' : '' }"
+						disabled="#{cadastroFornecedorBean.fornecedor.tipo == null}"
+						mask="#{cadastroFornecedorBean.formataMascara()}"
+						value="#{cadastroFornecedorBean.fornecedor.cpfCnpj}"
+						placeholder="Informe o dado do Fornecedor" />
+
+					<p:outputLabel value="Endereço" for="endereco" />
+					<p:inputText id="endereco" styleClass="up"
+						value="#{cadastroFornecedorBean.fornecedor.endereco}"
+						placeholder="Informe o endereço do Fornecedor" />
+
+					<p:outputLabel value="Telefone" for="telefone" />
+					<h:panelGroup>
+						<p:inputText id="telefone" styleClass="up"
+							value="#{cadastroFornecedorBean.fornecedor.telefone}"
+							placeholder="Informe o telefone do Fornecedor" />
+						<h:outputLabel value="é WhatsApp" style="color:green" />
+						<p:selectBooleanCheckbox style="margin-left:4px;margin-top:3px"
+							value="#{cadastroFornecedorBean.fornecedor.whatsApp}" />
+					</h:panelGroup>
+
+					<p:outputLabel value="Email" for="email" />
+					<p:inputText id="email" styleClass="up"
+						value="#{cadastroFornecedorBean.fornecedor.email}"
+						placeholder="Informe o email do Fornecedor" />
+
+
+
+					<p:outputLabel value="Categoria" for="categoria" />
+					<p:inputText id="categoria" styleClass="up"
+						value="#{cadastroFornecedorBean.fornecedor.categoria}"
+						placeholder="Informe a categoria do Fornecedor" />
+
+				</p:panelGrid>
+			</div>
+
+		</h:form>
+		<p:panelGrid id="scriptMask">
+			<script>
+						 $(function(){
+							  $('.cpf').mask('999.999.999-99');
+							  $('.cnpj').mask('99.999.999/9999-99');
+							});
+				</script>
+		</p:panelGrid>
+
+
+	</ui:define>
+</ui:composition>

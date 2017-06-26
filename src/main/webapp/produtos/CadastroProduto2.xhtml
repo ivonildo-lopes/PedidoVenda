@@ -24,9 +24,9 @@
 
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
-					<p:button value="Novo" outcome="/produtos/CadastroProduto" />
+					<p:button value="Novo" outcome="/produtos/CadastroProduto2" />
 					<p:commandButton value="Salvar" id="botaoSalvar"
-						action="#{cadastroProdutoBean.salvar}" update="@form" />
+						action="#{cadastroProdutoBean2.salvar}" update="@form" />
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
 					<p:button value="Pesquisa" outcome="/produtos/PesquisaProdutos" />
@@ -37,46 +37,19 @@
 				<p:panelGrid columns="2" id="painel"
 					columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
 					styleClass="ui-panelgrid-blank">
-					<p:outputLabel value="SKU" for="sku" />
-					<h:panelGroup>
-
-						<p:inputText id="sku" maxlength="20" styleClass="#{ 1 == 1 ? 'sku' : ''}"
-							placeholder="Ex.: AZ1289" size="20"
-							value="#{cadastroProdutoBean.produto.sku}" />
-						<p:outputLabel value="O SKU deve conter duas letras e 4 numeros" />
-					</h:panelGroup>
-
+					
 					<p:outputLabel value="Nome" for="nome" />
 					<p:inputText id="nome" maxlength="80"
 						placeholder="Informe o nome do produto"
-						value="#{cadastroProdutoBean.produto.nome}" styleClass="up" />
-
-					<p:outputLabel value="Categoria" for="categoria" />
-					<p:selectOneMenu id="categoria" converter="categoriaConverter"
-						value="#{cadastroProdutoBean.categoriaPai}">
-						<f:selectItem itemLabel="Selecione a categoria" />
-						<f:selectItems value="#{cadastroProdutoBean.categoriasRaizes}" />
-						<p:ajax listener="#{cadastroProdutoBean.carregarSubcategorias}"
-							update="subcategoria" />
-					</p:selectOneMenu>
-
-					<p:outputLabel value="Subcategoria" for="subcategoria" />
-					<p:selectOneMenu id="subcategoria" converter="categoriaConverter"
-						value="#{cadastroProdutoBean.produto.categoria}">
-						<f:selectItem itemLabel="Selecione a subcategoria" />
-						<f:selectItems value="#{cadastroProdutoBean.subcategorias}" />
-					</p:selectOneMenu>
+						value="#{cadastroProdutoBean2.produto.nome}" styleClass="up" />
 
 					<p:outputLabel value="Valor unitário" for="valorUnitario" />
 					<p:inputText id="valorUnitario" maxlength="10" styleClass="moeda"
 						placeholder="R$ 0,00"
-						value="#{cadastroProdutoBean.produto.valorUnitario}">
+						value="#{cadastroProdutoBean2.produto.valorM2}">
 						<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 					</p:inputText>
 
-					<p:outputLabel value="Estoque" for="estoque"/>
-					<p:inputText id="estoque" maxlength="5" 
-						value="#{cadastroProdutoBean.produto.quantidadeEstoque}" />
 				</p:panelGrid>
 			</div>
 		</h:form>

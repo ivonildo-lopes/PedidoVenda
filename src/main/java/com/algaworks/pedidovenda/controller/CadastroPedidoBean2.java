@@ -1,51 +1,45 @@
 package com.algaworks.pedidovenda.controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.algaworks.pedidovenda.model.Cliente;
 import com.algaworks.pedidovenda.model.EnderecoEntrega;
 import com.algaworks.pedidovenda.model.FormaPagamento;
 import com.algaworks.pedidovenda.model.ItemPedido;
-import com.algaworks.pedidovenda.model.Parcela;
-import com.algaworks.pedidovenda.model.Pedido;
-import com.algaworks.pedidovenda.model.Produto;
+import com.algaworks.pedidovenda.model.ItemPedido2;
+import com.algaworks.pedidovenda.model.Pedido2;
+import com.algaworks.pedidovenda.model.Produto2;
 import com.algaworks.pedidovenda.model.Usuario;
-import com.algaworks.pedidovenda.repository.ParcelaDAO;
 import com.algaworks.pedidovenda.service.ClienteService;
-import com.algaworks.pedidovenda.service.PedidoService;
-import com.algaworks.pedidovenda.service.ProdutoService;
+import com.algaworks.pedidovenda.service.PedidoService2;
+import com.algaworks.pedidovenda.service.ProdutoService2;
 import com.algaworks.pedidovenda.service.UsuarioService;
 import com.algaworks.pedidovenda.util.jsf.FacesUtil;
-import com.algaworks.pedidovenda.validation.PedidoAlteradoEvent;
+import com.algaworks.pedidovenda.validation.PedidoAlteradoEvent2;
 import com.algaworks.pedidovenda.validation.PedidoEdicao;
-import com.algaworks.pedidovenda.validation.SKU;
 
 @Named
 @ViewScoped
-public class CadastroPedidoBean implements Serializable {
+public class CadastroPedidoBean2 implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Produces
 	@PedidoEdicao
-	private Pedido pedido;
+	private Pedido2 pedido;
 
 	private List<Usuario> vendedores;
 
 	@Inject
-	private PedidoService pedidoService;
+	private PedidoService2 pedidoService;
 
 	@Inject
 	private UsuarioService usuarioService;
@@ -54,33 +48,17 @@ public class CadastroPedidoBean implements Serializable {
 	private ClienteService clienteService;
 
 	@Inject
-	private ProdutoService produtoService;
+	private ProdutoService2 produtoService;
 
-	private Produto produtoLinhaEditavel;
+	private Produto2 produtoLinhaEditavel;
 
-	@SKU
-	private String sku;
 
-	@Inject
-	private ParcelaDAO parcelaDAO;
-
-	private static List<Parcela> parcelas = new ArrayList<>();
-
-	// @PostConstruct
-	// public void init(){
-	// parcelas = parcelaDAO.porPedido(pedido);
-	// }
-
-	public CadastroPedidoBean() {
+	public CadastroPedidoBean2() {
 		Limpar();
 	}
 
 	public void salvar() {
 		try {
-
-			if (pedidoService.verificaDividaPendentePorCliente(pedido) > 0) {
-				FacesUtil.AvisoMessage("O cliente ainda possui divida pendente");
-			}
 			this.pedido = this.pedidoService.salvar(pedido);
 		} finally {
 			this.pedido.adicionaItemVazio();
@@ -92,7 +70,7 @@ public class CadastroPedidoBean implements Serializable {
 	}
 
 	public void Limpar() {
-		pedido = new Pedido();
+		pedido = new Pedido2();
 		pedido.setEnderecoEntrega(new EnderecoEntrega());
 
 	}
@@ -110,7 +88,6 @@ public class CadastroPedidoBean implements Serializable {
 
 			this.recalcularPedido();
 
-			parcelas = parcelaDAO.porPedido(pedido);
 		}
 	}
 
@@ -130,31 +107,31 @@ public class CadastroPedidoBean implements Serializable {
 
 	}
 
-	public List<Produto> completarProduto(String nome) {
+	public List<Produto2> completarProduto(String nome) {
 		return this.produtoService.porNome(nome.toUpperCase());
 	}
 
 	public void carregarProdutoLinhaEditavel() {
-		ItemPedido item = this.pedido.getItens().get(0);
+		ItemPedido2 item = this.pedido.getItens().get(0);
 		if (this.produtoLinhaEditavel != null) {
-			if (this.existeItemComProduto(this.produtoLinhaEditavel)) {
-				FacesUtil.AvisoMessage("Ja existe um item no pedido com o produto informado");
-			} else {
+//			if (this.existeItemComProduto(this.produtoLinhaEditavel)) {
+//				FacesUtil.AvisoMessage("Ja existe um item no pedido com o produto informado");
+//			} else {
 				item.setProduto(this.produtoLinhaEditavel);
-				item.setValorUnitario(this.produtoLinhaEditavel.getValorUnitario());
-
+				//item.setValorUnitario(this.produtoLinhaEditavel.getValorUnitario());
+				item.setValorM2(this.produtoLinhaEditavel.getValorM2());
+				
 				this.pedido.adicionaItemVazio();
 				this.produtoLinhaEditavel = null;
-				this.sku = null;
 				this.pedido.recalcularValorTotal();
-			}
+			//}
 		}
 	}
 
-	private boolean existeItemComProduto(Produto produto) {
+	private boolean existeItemComProduto(Produto2 produto) {
 		boolean existeItem = false;
 
-		for (ItemPedido item : this.getPedido().getItens()) {
+		for (ItemPedido2 item : this.getPedido().getItens()) {
 			if (produto.equals(item.getProduto())) {
 				existeItem = true;
 				break;
@@ -164,16 +141,17 @@ public class CadastroPedidoBean implements Serializable {
 		return existeItem;
 	}
 
-	public void carregarProdutoPorSKU() {
-		if (StringUtils.isNotEmpty(this.sku)) {
-			this.produtoLinhaEditavel = this.produtoService.porSku(this.sku);
-			this.carregarProdutoLinhaEditavel();
-		}
+	//modificar nome
+	public void atualizarQuantidade(ItemPedido2 item, int linha) {
 
-	}
-
-	public void atualizarQuantidade(ItemPedido item, int linha) {
-
+//		if (item.getLargura() < 1.0) {
+//			if (linha == 0) {
+//				item.setLargura(1.0);
+//			} else {
+//				this.getPedido().getItens().remove(linha);
+//			}
+//		}
+		
 		if (item.getQuantidade() < 1) {
 			if (linha == 0) {
 				item.setQuantidade(1);
@@ -186,15 +164,7 @@ public class CadastroPedidoBean implements Serializable {
 
 	}
 
-	public void removeItem(ItemPedido item,int linha) {
-
-		this.getPedido().getItens().remove(linha);
-		//this.getPedido().adicionaItemVazio();
-		this.pedido.recalcularValorTotal();
-
-	}
-
-	public void pedidoAlterado(@Observes PedidoAlteradoEvent event) {
+	public void pedidoAlterado(@Observes PedidoAlteradoEvent2 event) {
 		this.pedido = event.getPedido();
 	}
 
@@ -212,11 +182,11 @@ public class CadastroPedidoBean implements Serializable {
 	}
 
 	// get and set
-	public Pedido getPedido() {
+	public Pedido2 getPedido() {
 		return pedido;
 	}
 
-	public void setPedido(Pedido pedido) {
+	public void setPedido(Pedido2 pedido) {
 		this.pedido = pedido;
 	}
 
@@ -224,23 +194,12 @@ public class CadastroPedidoBean implements Serializable {
 		return vendedores;
 	}
 
-	public Produto getProdutoLinhaEditavel() {
+	public Produto2 getProdutoLinhaEditavel() {
 		return produtoLinhaEditavel;
 	}
 
-	public void setProdutoLinhaEditavel(Produto produtoLinhaEditavel) {
+	public void setProdutoLinhaEditavel(Produto2 produtoLinhaEditavel) {
 		this.produtoLinhaEditavel = produtoLinhaEditavel;
 	}
 
-	public String getSku() {
-		return sku;
-	}
-
-	public void setSku(String sku) {
-		this.sku = sku;
-	}
-
-	public List<Parcela> getParcelas() {
-		return parcelas = parcelaDAO.porPedido(pedido);
-	}
 }

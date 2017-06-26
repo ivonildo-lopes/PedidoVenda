@@ -1,0 +1,76 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa Fornecedores</ui:define>
+
+	<ui:define name="corpo">
+
+		<h:form>
+			<p:messages autoUpdate="true" closable="true" />
+
+			<h1>Pesquisa de Fornecedores</h1>
+
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisa"
+						action="#{pesquisaFornecedorBean.pesquisar()}" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/fornecedores/CadastroFornecedor" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<div class="ui-fluid">
+				<p:panelGrid columns="2" id="painel"
+					style="width: 100%; margin-top: 20px">
+
+					<p:outputLabel value="nome" />
+					<p:inputText size="40" styleClass="up"
+						value="#{pesquisaFornecedorBean.fornecedorParaPesquisa.nome}" />
+
+				</p:panelGrid>
+
+				<p:dataTable id="tabelaFornecedor" reflow="true"
+					value="#{pesquisaFornecedorBean.listaFornecedor}" var="fornecedor"
+					style="margin-top: 20px" emptyMessage="Nenhum fornecedor encontrado."
+					rows="20" paginator="true" paginatorAlwaysVisible="false"
+					paginatorPosition="bottom">
+
+					<p:column headerText="Fornecedor">
+						<h:outputText value="#{fornecedor.nome.toUpperCase()}" />
+					</p:column>
+					
+					<p:column headerText="CPF_CNPJ">
+						<h:outputText value="#{fornecedor.cpfCnpj.toUpperCase()}" />
+					</p:column>
+					
+					<p:column headerText="Contato">
+						<h:outputText value="#{fornecedor.telefone.toUpperCase()}" />
+					</p:column>
+					
+					<p:column headerText="Categoria">
+						<h:outputText value="#{fornecedor.categoria.toUpperCase()}" />
+					</p:column>
+					
+					<p:column headerText="E-mail">
+						<h:outputText value="#{fornecedor.email.toUpperCase()}" />
+					</p:column>
+
+					<p:column style="text-align: center; width: 50px">
+						<p:button icon="ui-icon-pencil" title="Editar"
+							outcome="/fornecedores/CadastroFornecedor">
+							<f:param name="fornecedor" value="#{fornecedor.id}" />
+						</p:button>
+					</p:column>
+				</p:dataTable>
+			</div>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

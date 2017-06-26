@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<p:dataTable value="#{cadastroPedidoBean2.pedido.itens}" var="item"
+		rowIndexVar="linha" id="tabelaItens">
+	
+		<p:column headerText="largura" style="width: 70px">
+			<p:inputText value="#{item.largura}" style="width: 40px"
+				disabled="#{cadastroPedidoBean2.pedido.naoAlteravel}">
+				<p:ajax event="change" process="@this"
+					update="tabelaItens :frmCadastroPedido2:totalPedido :frmCadastroPedido2:subtotal"
+					listener="#{cadastroPedidoBean2.atualizarQuantidade(item,linha)}" />
+			</p:inputText>
+		</p:column>
+		
+		<p:column headerText="altura" style="width: 70px">
+			<p:inputText value="#{item.altura}" style="width: 40px"
+				disabled="#{cadastroPedidoBean2.pedido.naoAlteravel}">
+				<p:ajax event="change" process="@this"
+					update="tabelaItens :frmCadastroPedido2:totalPedido :frmCadastroPedido2:subtotal"
+					listener="#{cadastroPedidoBean2.atualizarQuantidade(item,linha)}" />
+			</p:inputText>
+		</p:column>
+
+		<p:column headerText="Produto" style="text-align: center; width: 250px">
+			<h:outputText value="#{item.produto.nome}" style="width: 100px"
+				rendered="#{item.produtoAssociado}" />
+
+			<p:autoComplete styleClass="up"
+				value="#{cadastroPedidoBean2.produtoLinhaEditavel}"
+				completeMethod="#{cadastroPedidoBean2.completarProduto}"
+				var="produto" itemLabel="#{produto.nome}" itemValue="#{produto}"
+				forceSelection="true" rendered="#{not item.produtoAssociado}">
+
+				<p:ajax event="itemSelect"
+					update="tabelaItens :frmCadastroPedido2:totalPedido :frmCadastroPedido2:subtotal "
+					listener="#{cadastroPedidoBean2.carregarProdutoLinhaEditavel}" />
+
+			</p:autoComplete>
+		</p:column>
+
+		<p:column headerText="Qtd" style="width: 70px">
+			<p:inputText value="#{item.quantidade}" style="width: 40px"
+				disabled="#{cadastroPedidoBean2.pedido.naoAlteravel}">
+				<p:ajax event="change" process="@this"
+					update="tabelaItens :frmCadastroPedido2:totalPedido :frmCadastroPedido2:subtotal"
+					listener="#{cadastroPedidoBean2.atualizarQuantidade(item,linha)}" />
+			</p:inputText>
+		</p:column>
+
+		<p:column headerText="Valor metro²" style="text-align: center; width: 150px">
+			<h:outputText value="#{item.valorM2}">
+				<f:convertNumber type="currency" />
+			</h:outputText>
+		</p:column>
+
+
+		<p:column headerText="Valor total" style="text-align: center; width: 150px">
+			<h:outputText value="#{item.valorTotal}">
+				<f:convertNumber type="currency" />
+			</h:outputText>
+		</p:column>
+
+		<p:columnGroup type="footer">
+			<p:row>
+				<p:column colspan="5" footerText="Subtotal"
+					style="text-align: right" />
+				<p:column style="text-align: right">
+					<f:facet name="footer">
+						<h:outputText value="#{cadastroPedidoBean2.pedido.valorSubTotal}">
+							<f:convertNumber type="currency" />
+						</h:outputText>
+					</f:facet>
+				</p:column>
+			</p:row>
+		</p:columnGroup>
+	</p:dataTable>
+</ui:composition>

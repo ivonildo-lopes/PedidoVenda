@@ -45,7 +45,7 @@
 					placeholder="Informe o email do Cliente" />
 
 				<p:outputLabel value="CPF" for="cpf" />
-				<p:inputMask id="cpf" size="40" mask="999.999.999-99"
+				<p:inputText id="cpf" size="40" styleClass="cpf"
 					value="#{cadastroClienteBean.cliente.documentoReceitaFederal}"
 					placeholder="Informe o CPF do Cliente" />
 
@@ -69,7 +69,12 @@
 
 		</h:form>
 
-
+		<script>
+			$(function(){
+				$('.cpf').mask('999.999.999-99');
+				$('.dataNascimento').mask('99/99/9999');
+				})
+		</script>
 
 	</ui:define>
 </ui:composition>

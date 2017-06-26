@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 	<p:dataTable value="#{cadastroPedidoBean.pedido.itens}" var="item"
 		rowIndexVar="linha" id="tabelaItens">
-	
+
 		<p:column headerText="Qtde" style="width: 70px">
 			<p:inputText value="#{item.quantidade}" style="width: 40px"
 				disabled="#{cadastroPedidoBean.pedido.naoAlteravel}">
@@ -19,15 +19,18 @@
 			<h:outputText value="#{item.produto.sku}" style="width: 65px"
 				rendered="#{item.produtoAssociado}" />
 
-			<p:inputMask value="#{cadastroPedidoBean.sku}" label="SKU"
-				mask="aa9999" rendered="#{not item.produtoAssociado}" style="width: 65px">
+			<p:inputText value="#{cadastroPedidoBean.sku}" label="SKU"
+			    styleClass="#{ 1 == 1 ? 'sku' : ''}"
+				rendered="#{not item.produtoAssociado}"
+				style="width: 65px">
 				<p:ajax event="change" process="@this"
 					update="tabelaItens :frmCadastroPedido:totalPedido :frmCadastroPedido:subtotal"
 					listener="#{cadastroPedidoBean.carregarProdutoPorSKU}" />
-			</p:inputMask>
+			</p:inputText>
 		</p:column>
 
-		<p:column headerText="Produto" style="text-align: center; width: 250px">
+		<p:column headerText="Produto"
+			style="text-align: center; width: 250px">
 			<h:outputText value="#{item.produto .nome}" style="width: 100px"
 				rendered="#{item.produtoAssociado}" />
 
@@ -44,14 +47,13 @@
 			</p:autoComplete>
 		</p:column>
 
-		<p:column headerText="Vlr Unitário"
-			style="width: 120px">
+		<p:column headerText="Vlr Unitário" style="width: 120px">
 			<h:outputText value="#{item.valorUnitario}">
 				<f:convertNumber type="currency" />
 			</h:outputText>
 		</p:column>
 
-		
+
 
 		<p:column headerText="Estoque"
 			style="text-align: center; width: 100px">
@@ -63,24 +65,42 @@
 				rendered="#{item.estoqueInSuficiente}" />
 		</p:column>
 
-		<p:column headerText="Valor total" style="text-align: center; width: 150px">
+		<p:column headerText="Valor total"
+			style="text-align: center; width: 150px">
 			<h:outputText value="#{item.valorTotal}">
 				<f:convertNumber type="currency" />
 			</h:outputText>
+		</p:column>
+
+		<p:column headerText="acao" style="width: 55px">
+			<p:commandButton 
+				action="#{cadastroPedidoBean.removeItem(item,linha)}"
+				process="@this" icon="ui-icon-close"
+				update="tabelaItens :frmCadastroPedido:totalPedido :frmCadastroPedido:subtotal" />
+
 		</p:column>
 
 		<p:columnGroup type="footer">
 			<p:row>
 				<p:column colspan="5" footerText="Subtotal"
 					style="text-align: right" />
-				<p:column style="text-align: right">
+				<p:column style="text-align: right" colspan="2">
 					<f:facet name="footer">
-						<h:outputText value="#{cadastroPedidoBean.pedido.valorSubTotal}">
-							<f:convertNumber type="currency" />
-						</h:outputText>
+						<center>
+							<h:outputText value="#{cadastroPedidoBean.pedido.valorSubTotal}">
+								<f:convertNumber type="currency" />
+							</h:outputText>
+						</center>
 					</f:facet>
 				</p:column>
 			</p:row>
 		</p:columnGroup>
 	</p:dataTable>
+	
+	<script>
+		$(document).ready(function(){
+			  $('.sku').mask('aa9999');
+			});
+
+	</script>
 </ui:composition>
