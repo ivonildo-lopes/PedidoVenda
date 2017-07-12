@@ -16,9 +16,6 @@ import com.algaworks.pedidovenda.validation.PedidoEdicao;
 @RequestScoped
 public class CancelaPedidoBean implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Inject

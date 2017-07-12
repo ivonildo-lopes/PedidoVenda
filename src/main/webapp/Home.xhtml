@@ -8,9 +8,13 @@
 	<ui:define name="titulo">Dashboard</ui:define>
 
 	<ui:define name="corpo">
+		<f:metadata>
+		<f:event listener="#{homeBean.inicializar()}"
+			type="preRenderView" />
+		</f:metadata>
 
 		<h:form>
-			
+			<p:growl autoUpdate="true"/>
 			<div class="container">
 				<h2>Aniversariantes do dia</h2>
 				<table class="table table-striped">

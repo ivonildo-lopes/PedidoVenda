@@ -45,7 +45,7 @@ public class Datas {
 	/**
 	 * CALCULA IDADE
 	 */
-	public int calculaIdade(Date dtNascimento) {
+	public static int calculaIdade(Date dtNascimento) {
 
 		Calendar dataNascimento = Calendar.getInstance();
 		dataNascimento.setTime(dtNascimento);
