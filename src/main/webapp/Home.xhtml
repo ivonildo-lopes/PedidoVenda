@@ -1,6 +1,6 @@
 <ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
@@ -8,35 +8,24 @@
 	<ui:define name="titulo">Dashboard</ui:define>
 
 	<ui:define name="corpo">
-		<f:metadata>
-		<f:event listener="#{homeBean.inicializar()}"
-			type="preRenderView" />
-		</f:metadata>
+						
+		<h:form enctype="multipart/form-data">
+			
 
-		<h:form>
-			<p:growl autoUpdate="true"/>
-			<div class="container">
-				<h2>Aniversariantes do dia</h2>
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>NOME</th>
-							<th>DATA</th>
-						</tr>
-					</thead>
-
-					<ui:repeat var="cli" value="#{homeBean.listaClientes}"
-						varStatus="status">
-						<tbody>
-							<tr>
-								<td>#{cli.nome}</td>
-								<td>#{cli.dataNascimento}</td>
-							</tr>
-						</tbody>
-					</ui:repeat>
-
-				</table>
-			</div>
+			<h:panelGrid columns="3">
+				<h:outputLabel value="Descricao" for="descricao"/>
+				<h:inputText id="descricao" required="true" requiredMessage="informe a descricao" value="#{arquivoExcelBean.arquivoExcel.descricao}" />
+				<h:message for="descricao" />
+				<h:outputLabel value="Arquivo" />
+				<h:inputFile id="arquivo" required="true"
+				value="#{arquivoExcelBean.arquivo}"
+					requiredMessage="informe o arquivo" />
+				<h:message for="arquivo" />
+				<h:commandButton action="#{arquivoExcelBean.salvar()}"
+					value="Upload" immediate="false">
+					<f:ajax execute="@form" render="@all" />
+				</h:commandButton>
+			</h:panelGrid>
 
 		</h:form>
 
